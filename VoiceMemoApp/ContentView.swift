@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var textFieldText: String = ""
+
     var body: some View {
         VStack {
             HStack{
@@ -47,7 +49,7 @@ struct ContentView: View {
                                 .padding(.top, 10)
                                 .padding(.leading, 35)
                                 .foregroundColor(Color("RecordingSFSymbleColor"))
-                            Text("検索")
+                            TextField("検索", text: $textFieldText)
                                 .frame(maxHeight: .infinity, alignment: .top)
                                 .padding(.top, 15)
                                 .padding(.leading, 5)
@@ -112,6 +114,8 @@ struct ContentView: View {
         }
     }
 }
+
+   
 
 #Preview {
     ContentView()
