@@ -61,15 +61,34 @@ struct ContentView: View {
                                 .foregroundColor(Color("RecordingSFSymbleColor"))
                         }
                     }
-                    .padding(.bottom, 15)
+                    .padding(.bottom, 5)
                     
-                    VStack(spacing: 75) {
+                    VStack(spacing: 27) {
                         ForEach(0..<30) { index in
-                            Rectangle()
-                                .frame(width: 330, height: 1)
-                                .frame(maxHeight: .infinity, alignment: .top)
-                                .foregroundColor(Color("RecordingMemoLine"))
-                                .id(index) // IDを設定
+                            VStack {
+                                Rectangle()
+                                    .frame(width: 370, height: 1)
+                                    .frame(maxHeight: .infinity, alignment: .trailing)
+                                    .foregroundColor(Color("RecordingMemoLine"))
+                                    .id(index) // IDを設定
+                                    .padding(.top, 15)
+                                Text("新規録音")
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .bold()
+                                    .font(.system(size: 20))
+                                    .padding(.leading, 20)
+                                Spacer()
+                                HStack{
+                                    Text("2024/11/14")
+                                        .padding(.leading, 20)
+                                        .foregroundColor(Color("RecordingSFSymbleColor"))
+                                    Spacer()
+                                    Text("00:00")
+                                        .padding(.trailing, 20)
+                                        .foregroundColor(Color("RecordingSFSymbleColor"))
+                                }
+                                .padding(.bottom, -60)
+                            }
                         }
                     }
                 }
