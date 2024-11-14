@@ -31,44 +31,50 @@ struct ContentView: View {
                     .bold()
                     .font(.system(size: 100))
                 Spacer()
-            ScrollView{
-                ZStack{
-                    RoundedRectangle(cornerRadius: 10)
-                        .frame(width:350, height: 50)
-                        .frame(maxHeight: .infinity, alignment: .top)
-                        .foregroundColor(Color("RecordingSearchColor"))
-                        .bold()
+            ScrollViewReader { proxy in
+                ScrollView {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .frame(width: 350, height: 50)
+                            .frame(maxHeight: .infinity, alignment: .top)
+                            .foregroundColor(Color("RecordingSearchColor"))
+                            .bold()
+                        
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .frame(width: 20, height: 30)
+                                .frame(maxHeight: .infinity, alignment: .top)
+                                .padding(.top, 10)
+                                .padding(.leading, 35)
+                                .foregroundColor(Color("RecordingSFSymbleColor"))
+                            Text("検索")
+                                .frame(maxHeight: .infinity, alignment: .top)
+                                .padding(.top, 15)
+                                .padding(.leading, 5)
+                                .foregroundColor(Color("RecordingSFSymbleColor"))
+                            Spacer()
+                            Image(systemName: "mic.fill")
+                                .frame(width: 20, height: 30)
+                                .frame(maxHeight: .infinity, alignment: .top)
+                                .padding(.top, 10)
+                                .padding(.trailing, 35)
+                                .foregroundColor(Color("RecordingSFSymbleColor"))
+                        }
+                    }
+                    .padding(.bottom, 15)
                     
-                    HStack{
-                        Image(systemName: "magnifyingglass")
-                            .frame(width:20, height: 30)
-                            .frame(maxHeight: .infinity, alignment: .top)
-                            .padding(.top,  10)
-                            .padding(.leading, 35)
-                            .foregroundColor(Color("RecordingSFSymbleColor"))
-                        Text("検索")
-                            .frame(maxHeight: .infinity, alignment: .top)
-                            .padding(.top,  15)
-                            .padding(.leading, 5)
-                            .foregroundColor(Color("RecordingSFSymbleColor"))
-                        Spacer()
-                        Image(systemName: "mic.fill")
-                            .frame(width:20, height: 30)
-                            .frame(maxHeight: .infinity, alignment: .top)
-                            .padding(.top,  10)
-                            .padding(.trailing, 35)
-                            .foregroundColor(Color("RecordingSFSymbleColor"))
-                            
+                    VStack(spacing: 75) {
+                        ForEach(0..<30) { index in
+                            Rectangle()
+                                .frame(width: 330, height: 1)
+                                .frame(maxHeight: .infinity, alignment: .top)
+                                .foregroundColor(Color("RecordingMemoLine"))
+                                .id(index) // IDを設定
+                        }
                     }
                 }
-                .padding( .bottom , 15)
-                VStack(spacing: 75){
-                    ForEach(0..<30) { _ in
-                        Rectangle()
-                            .frame(width: 330,height: 1)
-                            .frame(maxHeight: .infinity, alignment: .top)
-                            .foregroundColor(Color("RecordingMemoLine"))
-                    }
+                .onAppear {
+                    proxy.scrollTo(0, anchor: .top)
                 }
             }
             ZStack{
