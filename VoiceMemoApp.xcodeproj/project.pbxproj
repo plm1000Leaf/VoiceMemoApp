@@ -11,6 +11,7 @@
 		28A1EEBD2CE5AA3B00D8F1C6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A1EEBC2CE5AA3B00D8F1C6 /* ContentView.swift */; };
 		28A1EEBF2CE5AA3E00D8F1C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28A1EEBE2CE5AA3E00D8F1C6 /* Assets.xcassets */; };
 		28A1EEC22CE5AA3E00D8F1C6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28A1EEC12CE5AA3E00D8F1C6 /* Preview Assets.xcassets */; };
+		28AB5EAB2CEB0E32001F4D83 /* VoiceMemoFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB5EAA2CEB0E32001F4D83 /* VoiceMemoFolderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		28A1EEBC2CE5AA3B00D8F1C6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		28A1EEBE2CE5AA3E00D8F1C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		28A1EEC12CE5AA3E00D8F1C6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		28AB5EAA2CEB0E32001F4D83 /* VoiceMemoFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMemoFolderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +54,7 @@
 			isa = PBXGroup;
 			children = (
 				28A1EEBA2CE5AA3B00D8F1C6 /* VoiceMemoAppApp.swift */,
-				28A1EEBC2CE5AA3B00D8F1C6 /* ContentView.swift */,
+				28AB5EA92CE772E4001F4D83 /* View */,
 				28A1EEBE2CE5AA3E00D8F1C6 /* Assets.xcassets */,
 				28A1EEC02CE5AA3E00D8F1C6 /* Preview Content */,
 			);
@@ -65,6 +67,15 @@
 				28A1EEC12CE5AA3E00D8F1C6 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		28AB5EA92CE772E4001F4D83 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				28A1EEBC2CE5AA3B00D8F1C6 /* ContentView.swift */,
+				28AB5EAA2CEB0E32001F4D83 /* VoiceMemoFolderView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +150,7 @@
 			files = (
 				28A1EEBD2CE5AA3B00D8F1C6 /* ContentView.swift in Sources */,
 				28A1EEBB2CE5AA3B00D8F1C6 /* VoiceMemoAppApp.swift in Sources */,
+				28AB5EAB2CEB0E32001F4D83 /* VoiceMemoFolderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
