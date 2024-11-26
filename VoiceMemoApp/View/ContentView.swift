@@ -2,7 +2,6 @@
 //  ContentView.swift
 //  VoiceMemoApp
 //
-//  Created by 千葉陽乃 on 2024/11/14.
 //
 
 import SwiftUI
@@ -85,7 +84,7 @@ struct ContentView: View {
                                         .foregroundColor(Color("RecordingMemoLine"))
                                         .id(index) // IDを設定
                                         .padding(.top, 15)
-                                    Text("新規録音")
+                                    Text("新規録音\(index + 1)")
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .bold()
                                         .font(.system(size: 20))

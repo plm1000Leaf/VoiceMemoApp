@@ -2,7 +2,6 @@
 //  SeekBarView.swift
 //  VoiceMemoApp
 //
-//  Created by 千葉陽乃 on 2024/11/26.
 //
 
 import SwiftUI
