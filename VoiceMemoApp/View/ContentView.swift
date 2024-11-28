@@ -117,19 +117,7 @@ struct ContentView: View {
                         proxy.scrollTo(0, anchor: .top)
                     }
                 }
-                ZStack{
-                    Rectangle()
-                        .frame(width:400, height: 130)
-                        .frame(alignment: .bottom)
-                        .foregroundColor(Color("RecordingBottomColor"))
-                    Circle()
-                        .stroke(Color("RecordingButtonLineColor"), lineWidth: 5)
-                        .frame(width:80, height: 80)
-                    Circle()
-                        .foregroundColor(Color("RecordingButtonColor"))
-                        .frame(width:65, height: 65)
-                    
-                }
+                RecodingButtonView()
             }
         }
     }

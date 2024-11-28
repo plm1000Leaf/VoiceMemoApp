@@ -13,6 +13,7 @@
 		28A1EEC22CE5AA3E00D8F1C6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28A1EEC12CE5AA3E00D8F1C6 /* Preview Assets.xcassets */; };
 		28AB5EAB2CEB0E32001F4D83 /* VoiceMemoFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB5EAA2CEB0E32001F4D83 /* VoiceMemoFolderView.swift */; };
 		28AB5EAD2CF5B372001F4D83 /* SeekBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB5EAC2CF5B372001F4D83 /* SeekBarView.swift */; };
+		28AB5EAF2CF5E0CE001F4D83 /* RecodingButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB5EAE2CF5E0CE001F4D83 /* RecodingButtonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		28A1EEC12CE5AA3E00D8F1C6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		28AB5EAA2CEB0E32001F4D83 /* VoiceMemoFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMemoFolderView.swift; sourceTree = "<group>"; };
 		28AB5EAC2CF5B372001F4D83 /* SeekBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekBarView.swift; sourceTree = "<group>"; };
+		28AB5EAE2CF5E0CE001F4D83 /* RecodingButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecodingButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				28A1EEBC2CE5AA3B00D8F1C6 /* ContentView.swift */,
 				28AB5EAA2CEB0E32001F4D83 /* VoiceMemoFolderView.swift */,
 				28AB5EAC2CF5B372001F4D83 /* SeekBarView.swift */,
+				28AB5EAE2CF5E0CE001F4D83 /* RecodingButtonView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 				28A1EEBD2CE5AA3B00D8F1C6 /* ContentView.swift in Sources */,
 				28A1EEBB2CE5AA3B00D8F1C6 /* VoiceMemoAppApp.swift in Sources */,
 				28AB5EAB2CEB0E32001F4D83 /* VoiceMemoFolderView.swift in Sources */,
+				28AB5EAF2CF5E0CE001F4D83 /* RecodingButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
