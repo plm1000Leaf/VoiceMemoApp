@@ -63,6 +63,7 @@ struct VoiceMemoFolderView: View {
                                             Text("\(n[index])")
                                                 .frame(maxWidth: .infinity, alignment: .leading)
                                                 .padding(.leading, -50)
+                                                .foregroundColor(.black)
                                             Text("3")
                                                 .foregroundColor(Color("DataCount"))
                                             Image(systemName: "chevron.right")
@@ -119,6 +120,7 @@ struct VoiceMemoFolderView: View {
                     .foregroundColor(.blue)
             }
             .background(Color("Background"))
+            .navigationBarBackButtonHidden(true)
         }
     }
     @ViewBuilder

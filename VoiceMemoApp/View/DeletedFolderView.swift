@@ -122,7 +122,6 @@ struct DeletedFolderView: View {
                         }
                     }
                 }
-                RecodingButtonView()
             }
         }
     }

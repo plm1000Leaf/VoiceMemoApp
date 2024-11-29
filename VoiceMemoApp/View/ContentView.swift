@@ -22,6 +22,7 @@ struct ContentView: View {
                             .foregroundColor(.blue)
                             .bold()
                     }
+                    .navigationBarBackButtonHidden(true)
                     Text("編集")
                         .font(.system(size: 20))
                         .foregroundColor(.blue)

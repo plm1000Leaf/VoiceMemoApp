@@ -29,7 +29,7 @@ struct OftenUsedFolderView: View {
                         .padding(.trailing, 20)
                         .bold()
                 }
-                Text("最近削除された項目")
+                Text("よく使う項目")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.largeTitle)
                     .padding(.leading, 20)
@@ -122,6 +122,7 @@ struct OftenUsedFolderView: View {
                         }
                     }
                 }
+                RecodingButtonView()
             }
         }
     }
