@@ -14,6 +14,8 @@
 		28AB5EAB2CEB0E32001F4D83 /* VoiceMemoFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB5EAA2CEB0E32001F4D83 /* VoiceMemoFolderView.swift */; };
 		28AB5EAD2CF5B372001F4D83 /* SeekBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB5EAC2CF5B372001F4D83 /* SeekBarView.swift */; };
 		28AB5EAF2CF5E0CE001F4D83 /* RecodingButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB5EAE2CF5E0CE001F4D83 /* RecodingButtonView.swift */; };
+		28B04C1C2CF9A15D004E6115 /* DeletedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B04C1B2CF9A15D004E6115 /* DeletedFolderView.swift */; };
+		28B04C202CF9B26F004E6115 /* OftenUsedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B04C1F2CF9B26F004E6115 /* OftenUsedFolderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		28AB5EAA2CEB0E32001F4D83 /* VoiceMemoFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMemoFolderView.swift; sourceTree = "<group>"; };
 		28AB5EAC2CF5B372001F4D83 /* SeekBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekBarView.swift; sourceTree = "<group>"; };
 		28AB5EAE2CF5E0CE001F4D83 /* RecodingButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecodingButtonView.swift; sourceTree = "<group>"; };
+		28B04C1B2CF9A15D004E6115 /* DeletedFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedFolderView.swift; sourceTree = "<group>"; };
+		28B04C1F2CF9B26F004E6115 /* OftenUsedFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OftenUsedFolderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,8 @@
 				28AB5EAA2CEB0E32001F4D83 /* VoiceMemoFolderView.swift */,
 				28AB5EAC2CF5B372001F4D83 /* SeekBarView.swift */,
 				28AB5EAE2CF5E0CE001F4D83 /* RecodingButtonView.swift */,
+				28B04C1B2CF9A15D004E6115 /* DeletedFolderView.swift */,
+				28B04C1F2CF9B26F004E6115 /* OftenUsedFolderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -158,6 +164,8 @@
 				28A1EEBD2CE5AA3B00D8F1C6 /* ContentView.swift in Sources */,
 				28A1EEBB2CE5AA3B00D8F1C6 /* VoiceMemoAppApp.swift in Sources */,
 				28AB5EAB2CEB0E32001F4D83 /* VoiceMemoFolderView.swift in Sources */,
+				28B04C202CF9B26F004E6115 /* OftenUsedFolderView.swift in Sources */,
+				28B04C1C2CF9A15D004E6115 /* DeletedFolderView.swift in Sources */,
 				28AB5EAF2CF5E0CE001F4D83 /* RecodingButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

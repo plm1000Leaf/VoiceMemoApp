@@ -1,12 +1,13 @@
 //
-//  ContentView.swift
+//  DeletedFolderView.swift
 //  VoiceMemoApp
 //
+//  Created by 千葉陽乃 on 2024/11/29.
 //
 
 import SwiftUI
 
-struct ContentView: View {
+struct DeletedFolderView: View {
     @State private var textFieldText: String = ""
     @State private var expandedIndex: Int? = nil
     
@@ -14,7 +15,7 @@ struct ContentView: View {
         NavigationStack{
             VStack {
                 HStack{
-                    NavigationLink(destination: VoiceMemoFolderView()) {
+                    NavigationLink(destination: VoiceMemoFolderView()){
                         Image(systemName: "chevron.backward")
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.leading, 10)
@@ -28,7 +29,7 @@ struct ContentView: View {
                         .padding(.trailing, 20)
                         .bold()
                 }
-                Text("すべての録音")
+                Text("最近削除された項目")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.largeTitle)
                     .padding(.leading, 20)
@@ -69,7 +70,7 @@ struct ContentView: View {
                         .padding(.bottom, 5)
                         
                         VStack(spacing: 27) {
-                            ForEach(0..<30, id: \.self) { index in
+                            ForEach(0..<1, id: \.self) { index in
                                 Button(action: {
                                     withAnimation {
                                         // 同じ場所をタップしたら閉じる
@@ -120,15 +121,14 @@ struct ContentView: View {
                             proxy.scrollTo(0, anchor: .top)
                         }
                     }
-                    RecodingButtonView()
                 }
+                RecodingButtonView()
             }
         }
     }
 }
-
    
 
 #Preview {
-    ContentView()
+    DeletedFolderView()
 }
