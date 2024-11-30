@@ -18,9 +18,9 @@ struct RecodingButtonView: View {
             }
             
             ZStack{
-                Rectangle()
-                    .frame(width: 400, height: 130)
-                    .foregroundColor(Color("RecordingBottomColor"))
+                
+                buttonBackArea
+                
                 Button(action: {
                     withAnimation {
                         showTab.toggle()
@@ -68,5 +68,11 @@ extension RecodingButtonView {
                 .foregroundColor(Color("RecordingButtonColor"))
                 .frame(width:65, height: 65)
             }
+    }
+    
+    private var buttonBackArea: some View {
+        Rectangle()
+            .frame(width: 400, height: 130)
+            .foregroundColor(Color("RecordingBottomColor"))
     }
 }
