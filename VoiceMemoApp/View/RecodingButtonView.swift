@@ -13,26 +13,9 @@ struct RecodingButtonView: View {
     
     var body: some View {
         VStack(spacing: 0){
-            
-                if showTab {
-
-                    ZStack{
-                            Rectangle()
-                                .frame(width: 400, height:200)
-                                .foregroundColor(Color("RecordingBottomColor"))
-                                .frame(maxWidth: .infinity, alignment: .bottom)
-                        
-                        VStack{
-                            Text("東京都")
-                            Text("00:00:00")
-                            Spacer().frame(height: 50)
-                            Rectangle()
-                                .frame(width: 400, height:1)
-                            
-                        }
-                            
-                        }
-                }
+            if showTab {
+                showTabArea
+            }
             
             ZStack{
                 Rectangle()
@@ -43,14 +26,8 @@ struct RecodingButtonView: View {
                         showTab.toggle()
                     }
                 })
-                {   ZStack{
-                    Circle()
-                        .stroke(Color("RecordingButtonLineColor"), lineWidth: 5)
-                        .frame(width:80, height: 80)
-                    Circle()
-                        .foregroundColor(Color("RecordingButtonColor"))
-                        .frame(width:65, height: 65)
-                }
+                {
+                    buttonArea
                 }
             }
         }
@@ -59,4 +36,37 @@ struct RecodingButtonView: View {
 
 #Preview {
     RecodingButtonView()
+}
+
+extension RecodingButtonView {
+    private var showTabArea: some View {
+            ZStack{
+                Rectangle()
+                    .frame(width: 400, height:200)
+                    .foregroundColor(Color("RecordingBottomColor"))
+                    .frame(maxWidth: .infinity, alignment: .bottom)
+                
+                VStack{
+                    Text("東京都")
+                    Text("00:00:00")
+                    Spacer().frame(height: 50)
+                    Rectangle()
+                        .frame(width: 400, height:1)
+                    
+                }
+                
+        }
+        
+    }
+    
+    private var buttonArea: some View {
+        ZStack{
+            Circle()
+                .stroke(Color("RecordingButtonLineColor"), lineWidth: 5)
+                .frame(width:80, height: 80)
+            Circle()
+                .foregroundColor(Color("RecordingButtonColor"))
+                .frame(width:65, height: 65)
+            }
+    }
 }
