@@ -16,8 +16,8 @@
 		28AB5EAF2CF5E0CE001F4D83 /* RecodingButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB5EAE2CF5E0CE001F4D83 /* RecodingButtonView.swift */; };
 		28B04C1C2CF9A15D004E6115 /* DeletedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B04C1B2CF9A15D004E6115 /* DeletedFolderView.swift */; };
 		28B04C202CF9B26F004E6115 /* OftenUsedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B04C1F2CF9B26F004E6115 /* OftenUsedFolderView.swift */; };
-		28B04C232CFB434E004E6115 /* VoiceMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B04C222CFB434E004E6115 /* VoiceMemo.swift */; };
-		28B04C252CFB4372004E6115 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B04C242CFB4372004E6115 /* Folder.swift */; };
+		28E0BB582CFD8CD2000E910C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28E0BB562CFD8CD2000E910C /* Model.xcdatamodeld */; };
+		28E0BB712CFD9F07000E910C /* Folder+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E0BB6E2CFD9F07000E910C /* Folder+CoreDataClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,8 +31,8 @@
 		28AB5EAE2CF5E0CE001F4D83 /* RecodingButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecodingButtonView.swift; sourceTree = "<group>"; };
 		28B04C1B2CF9A15D004E6115 /* DeletedFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedFolderView.swift; sourceTree = "<group>"; };
 		28B04C1F2CF9B26F004E6115 /* OftenUsedFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OftenUsedFolderView.swift; sourceTree = "<group>"; };
-		28B04C222CFB434E004E6115 /* VoiceMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMemo.swift; sourceTree = "<group>"; };
-		28B04C242CFB4372004E6115 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
+		28E0BB572CFD8CD2000E910C /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		28E0BB6E2CFD9F07000E910C /* Folder+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataClass.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +49,7 @@
 		28A1EEAE2CE5AA3B00D8F1C6 = {
 			isa = PBXGroup;
 			children = (
+				28E0BB6E2CFD9F07000E910C /* Folder+CoreDataClass.swift */,
 				28A1EEB92CE5AA3B00D8F1C6 /* VoiceMemoApp */,
 				28A1EEB82CE5AA3B00D8F1C6 /* Products */,
 			);
@@ -67,8 +68,8 @@
 			children = (
 				28A1EEBA2CE5AA3B00D8F1C6 /* VoiceMemoAppApp.swift */,
 				28AB5EA92CE772E4001F4D83 /* View */,
-				28B04C212CFB4249004E6115 /* Model */,
 				28A1EEBE2CE5AA3E00D8F1C6 /* Assets.xcassets */,
+				28E0BB522CFD8A27000E910C /* DataServises */,
 				28A1EEC02CE5AA3E00D8F1C6 /* Preview Content */,
 			);
 			path = VoiceMemoApp;
@@ -95,13 +96,12 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		28B04C212CFB4249004E6115 /* Model */ = {
+		28E0BB522CFD8A27000E910C /* DataServises */ = {
 			isa = PBXGroup;
 			children = (
-				28B04C222CFB434E004E6115 /* VoiceMemo.swift */,
-				28B04C242CFB4372004E6115 /* Folder.swift */,
+				28E0BB562CFD8CD2000E910C /* Model.xcdatamodeld */,
 			);
-			path = Model;
+			path = DataServises;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,10 +179,10 @@
 				28A1EEBB2CE5AA3B00D8F1C6 /* VoiceMemoAppApp.swift in Sources */,
 				28AB5EAB2CEB0E32001F4D83 /* VoiceMemoFolderView.swift in Sources */,
 				28B04C202CF9B26F004E6115 /* OftenUsedFolderView.swift in Sources */,
+				28E0BB712CFD9F07000E910C /* Folder+CoreDataClass.swift in Sources */,
 				28B04C1C2CF9A15D004E6115 /* DeletedFolderView.swift in Sources */,
-				28B04C232CFB434E004E6115 /* VoiceMemo.swift in Sources */,
+				28E0BB582CFD8CD2000E910C /* Model.xcdatamodeld in Sources */,
 				28AB5EAF2CF5E0CE001F4D83 /* RecodingButtonView.swift in Sources */,
-				28B04C252CFB4372004E6115 /* Folder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +386,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		28E0BB562CFD8CD2000E910C /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				28E0BB572CFD8CD2000E910C /* Model.xcdatamodel */,
+			);
+			currentVersion = 28E0BB572CFD8CD2000E910C /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 28A1EEAF2CE5AA3B00D8F1C6 /* Project object */;
 }
