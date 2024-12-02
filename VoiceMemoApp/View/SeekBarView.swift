@@ -61,9 +61,13 @@ struct SeekBarView: View {
                         Image(systemName: isPlaying ? "pause.fill" : "play.fill")
                     }
                     
-                    
-                    Image(systemName: "goforward.15")
-                        .padding(.horizontal, 13)
+                    Button(action: {
+                        // 現在の時間を15秒戻す
+                        currentTime = min(currentTime +  stepTime, totalTime)
+                    }){
+                        Image(systemName: "goforward.15")
+                            .padding(.horizontal, 13)
+                    }
                     
                 }
                 .foregroundColor(.black)
