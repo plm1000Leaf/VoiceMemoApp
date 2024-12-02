@@ -17,7 +17,9 @@
 		28B04C1C2CF9A15D004E6115 /* DeletedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B04C1B2CF9A15D004E6115 /* DeletedFolderView.swift */; };
 		28B04C202CF9B26F004E6115 /* OftenUsedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B04C1F2CF9B26F004E6115 /* OftenUsedFolderView.swift */; };
 		28E0BB582CFD8CD2000E910C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28E0BB562CFD8CD2000E910C /* Model.xcdatamodeld */; };
-		28E0BB712CFD9F07000E910C /* Folder+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E0BB6E2CFD9F07000E910C /* Folder+CoreDataClass.swift */; };
+		28E0BB782CFDAB20000E910C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E0BB772CFDAB20000E910C /* AppDelegate.swift */; };
+		28E0BB7A2CFDC306000E910C /* VoiceMemoEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E0BB792CFDC306000E910C /* VoiceMemoEntities.swift */; };
+		28E0BB7C2CFDC32A000E910C /* VoiceMemoEntities+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E0BB7B2CFDC32A000E910C /* VoiceMemoEntities+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +34,9 @@
 		28B04C1B2CF9A15D004E6115 /* DeletedFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedFolderView.swift; sourceTree = "<group>"; };
 		28B04C1F2CF9B26F004E6115 /* OftenUsedFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OftenUsedFolderView.swift; sourceTree = "<group>"; };
 		28E0BB572CFD8CD2000E910C /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		28E0BB6E2CFD9F07000E910C /* Folder+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataClass.swift"; sourceTree = "<group>"; };
+		28E0BB772CFDAB20000E910C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		28E0BB792CFDC306000E910C /* VoiceMemoEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMemoEntities.swift; sourceTree = "<group>"; };
+		28E0BB7B2CFDC32A000E910C /* VoiceMemoEntities+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VoiceMemoEntities+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,7 +53,6 @@
 		28A1EEAE2CE5AA3B00D8F1C6 = {
 			isa = PBXGroup;
 			children = (
-				28E0BB6E2CFD9F07000E910C /* Folder+CoreDataClass.swift */,
 				28A1EEB92CE5AA3B00D8F1C6 /* VoiceMemoApp */,
 				28A1EEB82CE5AA3B00D8F1C6 /* Products */,
 			);
@@ -66,7 +69,9 @@
 		28A1EEB92CE5AA3B00D8F1C6 /* VoiceMemoApp */ = {
 			isa = PBXGroup;
 			children = (
+				28E0BB7D2CFDC35C000E910C /* Model */,
 				28A1EEBA2CE5AA3B00D8F1C6 /* VoiceMemoAppApp.swift */,
+				28E0BB772CFDAB20000E910C /* AppDelegate.swift */,
 				28AB5EA92CE772E4001F4D83 /* View */,
 				28A1EEBE2CE5AA3E00D8F1C6 /* Assets.xcassets */,
 				28E0BB522CFD8A27000E910C /* DataServises */,
@@ -102,6 +107,15 @@
 				28E0BB562CFD8CD2000E910C /* Model.xcdatamodeld */,
 			);
 			path = DataServises;
+			sourceTree = "<group>";
+		};
+		28E0BB7D2CFDC35C000E910C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				28E0BB792CFDC306000E910C /* VoiceMemoEntities.swift */,
+				28E0BB7B2CFDC32A000E910C /* VoiceMemoEntities+CoreDataProperties.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,12 +188,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28E0BB782CFDAB20000E910C /* AppDelegate.swift in Sources */,
 				28AB5EAD2CF5B372001F4D83 /* SeekBarView.swift in Sources */,
 				28A1EEBD2CE5AA3B00D8F1C6 /* ContentView.swift in Sources */,
+				28E0BB7A2CFDC306000E910C /* VoiceMemoEntities.swift in Sources */,
 				28A1EEBB2CE5AA3B00D8F1C6 /* VoiceMemoAppApp.swift in Sources */,
+				28E0BB7C2CFDC32A000E910C /* VoiceMemoEntities+CoreDataProperties.swift in Sources */,
 				28AB5EAB2CEB0E32001F4D83 /* VoiceMemoFolderView.swift in Sources */,
 				28B04C202CF9B26F004E6115 /* OftenUsedFolderView.swift in Sources */,
-				28E0BB712CFD9F07000E910C /* Folder+CoreDataClass.swift in Sources */,
 				28B04C1C2CF9A15D004E6115 /* DeletedFolderView.swift in Sources */,
 				28E0BB582CFD8CD2000E910C /* Model.xcdatamodeld in Sources */,
 				28AB5EAF2CF5E0CE001F4D83 /* RecodingButtonView.swift in Sources */,

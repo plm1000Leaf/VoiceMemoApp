@@ -7,9 +7,12 @@
 
 import SwiftUI
 
+
+
 struct OftenUsedFolderView: View {
     @State private var textFieldText: String = ""
     @State private var expandedIndex: Int? = nil
+    @Environment(\.managedObjectContext) private var context
     
     var body: some View {
         NavigationStack{
@@ -20,7 +23,7 @@ struct OftenUsedFolderView: View {
                 ScrollViewReader { proxy in
                     scrollArea
                 }
-                RecodingButtonView()
+                RecodingButtonView(context: context)
             }
         }
     }

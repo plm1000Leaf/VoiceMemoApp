@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.managedObjectContext) private var context
     @State private var textFieldText: String = ""
     @State private var expandedIndex: Int? = nil
     
@@ -23,7 +24,7 @@ struct ContentView: View {
                             proxy.scrollTo(0, anchor: .top)
                         }
                     
-                    RecodingButtonView()
+                    RecodingButtonView(context: context)
                 }
             }
         }

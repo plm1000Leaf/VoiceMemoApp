@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import CoreData
+
 
 struct RecodingButtonView: View {
-    
+    let context: NSManagedObjectContext
     @State private var showTab: Bool = false
     
     var body: some View {
@@ -23,6 +25,7 @@ struct RecodingButtonView: View {
                 
                 Button(action: {
                     withAnimation {
+                        addVoiceMemo()
                         showTab.toggle()
                     }
                 })
@@ -35,10 +38,40 @@ struct RecodingButtonView: View {
 }
 
 #Preview {
-    RecodingButtonView()
+    // コンテキストのモックを渡す
+    let previewContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    return RecodingButtonView(context: previewContext)
 }
 
 extension RecodingButtonView {
+    
+    private func addVoiceMemo() {
+        // VoiceMemoEntitiesを作成
+        guard let entity = NSEntityDescription.entity(forEntityName: "VoiceMemoEntities", in: context) else {
+            print("VoiceMemoEntitiesのエンティティが見つかりません")
+            return
+        }
+
+        // 正しい初期化を使用
+        let newMemo = VoiceMemoEntities(entity: entity, insertInto: context)
+
+        newMemo.id = UUID()
+        newMemo.title = "New Memo \(Date())"
+        newMemo.filePath = "/path/to/new_memo.m4a"
+        newMemo.createdAt = Date()
+        newMemo.duration = Double.random(in: 60...300)
+        newMemo.location = "Unknown"
+
+        // 保存処理
+        do {
+            try context.save()
+            print("新しいVoiceMemoが追加されました: \(newMemo.title ?? "No Title")")
+        } catch {
+            print("VoiceMemo追加中にエラーが発生しました: \(error)")
+        }
+    }
+
+    
     private var showTabArea: some View {
             ZStack{
                 Rectangle()
