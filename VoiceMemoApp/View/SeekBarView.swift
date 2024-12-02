@@ -9,10 +9,12 @@ import SwiftUI
 struct SeekBarView: View {
     @State private var currentTime: Double = 0
     @State private var isPlaying: Bool = false
-    // 現在の再生位置
+    @State private var timer: Timer?
+    //    全体の再生時間（仮に100秒とする）
     let totalTime: Double = 100
-    
-//    全体の再生時間（仮に100秒とする）
+    // スキップする秒数
+    let stepTime: Double = 15
+    let stepInterval: TimeInterval = 1.0
     
     var body: some View {
         VStack {
@@ -36,19 +38,36 @@ struct SeekBarView: View {
                     .foregroundColor(.blue)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading, 30)
-                Image(systemName: "gobackward.15")
-                    .padding(.horizontal, 13)
                 
-                Button(action: {
-                     // 再生/一時停止の切り替え
-                     isPlaying.toggle()
-                 }) {
-                     Image(systemName: isPlaying ? "pause.fill" : "play.fill")
-                 }
-                 .foregroundColor(.black)
-                 
-                Image(systemName: "goforward.15")
-                    .padding(.horizontal, 13)
+                HStack {
+                    
+                    
+                    Button(action: {
+                        // 現在の時間を15秒戻す
+                        currentTime = max(currentTime - stepTime, 0)
+                    }){
+                        Image(systemName: "gobackward.15")
+                            .padding(.horizontal, 13)
+                    }
+                    
+                    Button(action: {
+                        isPlaying.toggle()
+                    if isPlaying {
+                        startTimer()
+                    } else {
+                        stopTimer()
+                        }
+                    }) {
+                        Image(systemName: isPlaying ? "pause.fill" : "play.fill")
+                    }
+                    
+                    
+                    Image(systemName: "goforward.15")
+                        .padding(.horizontal, 13)
+                    
+                }
+                .foregroundColor(.black)
+                
                 Image(systemName: "trash")
                     .foregroundColor(.blue)
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -57,6 +76,23 @@ struct SeekBarView: View {
             .font(.system(size: 27))
             
         }
+    }
+    
+    private func startTimer() {
+        stopTimer() // 既存のタイマーを停止して新しいタイマーを作成
+        timer = Timer.scheduledTimer(withTimeInterval: stepInterval, repeats: true) { _ in
+            if currentTime < totalTime {
+                currentTime += 1
+            } else {
+                stopTimer()
+                isPlaying = false
+            }
+        }
+    }
+    
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = nil
     }
     
     // 秒を「分:秒」の形式にフォーマットする関数
