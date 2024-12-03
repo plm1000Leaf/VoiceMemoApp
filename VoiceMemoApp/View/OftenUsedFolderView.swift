@@ -1,29 +1,35 @@
 //
-//  OftenUsedFolderView.swift
+//  ContentView.swift
 //  VoiceMemoApp
 //
-//  Created by 千葉陽乃 on 2024/11/29.
 //
 
 import SwiftUI
 
-
-
 struct OftenUsedFolderView: View {
+    @Environment(\.managedObjectContext) private var context
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \VoiceMemoEntities.createdAt, ascending: false)],
+        animation: .default
+    ) private var voiceMemos: FetchedResults<VoiceMemoEntities>
     @State private var textFieldText: String = ""
     @State private var expandedIndex: Int? = nil
-    @Environment(\.managedObjectContext) private var context
     
     var body: some View {
         NavigationStack{
             VStack {
+                
                 headerArea
                 titleArea
                 Spacer()
                 ScrollViewReader { proxy in
                     scrollArea
+                        .onAppear {
+                            proxy.scrollTo(0, anchor: .top)
+                        }
+                    
+                    RecodingButtonView(context: context)
                 }
-                RecodingButtonView(context: context)
             }
         }
     }
@@ -35,10 +41,14 @@ struct OftenUsedFolderView: View {
     OftenUsedFolderView()
 }
 
-extension  OftenUsedFolderView{
+
+
+
+extension OftenUsedFolderView {
+    
     private var headerArea: some View {
         HStack{
-            NavigationLink(destination: VoiceMemoFolderView()){
+            NavigationLink(destination: VoiceMemoFolderView()) {
                 Image(systemName: "chevron.backward")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading, 10)
@@ -46,6 +56,7 @@ extension  OftenUsedFolderView{
                     .foregroundColor(.blue)
                     .bold()
             }
+            .navigationBarBackButtonHidden(true)
             Text("編集")
                 .font(.system(size: 20))
                 .foregroundColor(.blue)
@@ -55,7 +66,7 @@ extension  OftenUsedFolderView{
     }
     
     private var titleArea: some View {
-        Text("よく使う項目")
+        Text("すべての録音")
             .frame(maxWidth: .infinity, alignment: .leading)
             .font(.largeTitle)
             .padding(.leading, 20)
@@ -64,7 +75,7 @@ extension  OftenUsedFolderView{
             .font(.system(size: 100))
     }
     
-    private var scrollArea: some View {
+    private var scrollArea: some View{
         ScrollView {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
@@ -97,15 +108,10 @@ extension  OftenUsedFolderView{
             .padding(.bottom, 5)
             
             VStack(spacing: 27) {
-                ForEach(0..<1, id: \.self) { index in
+                ForEach(voiceMemos, id: \.self) { memo in
                     Button(action: {
                         withAnimation {
-                            // 同じ場所をタップしたら閉じる
-                            if expandedIndex == index {
-                                expandedIndex = nil
-                            } else {
-                                expandedIndex = index
-                            }
+                    expandedIndex = (expandedIndex == memo.objectID.hashValue) ? nil : memo.objectID.hashValue
                         }
                     }){
                         VStack {
@@ -113,9 +119,8 @@ extension  OftenUsedFolderView{
                                 .frame(width: 370, height: 1)
                                 .frame(maxHeight: .infinity, alignment: .trailing)
                                 .foregroundColor(Color("RecordingMemoLine"))
-                                .id(index) // IDを設定
                                 .padding(.top, 15)
-                            Text("新規録音\(index + 1)")
+                            Text(memo.title ?? "新規録音")
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .bold()
                                 .font(.system(size: 20))
@@ -123,11 +128,11 @@ extension  OftenUsedFolderView{
                                 .foregroundColor(.black)
                             Spacer()
                             HStack{
-                                Text("2024/11/14")
+                                Text(memo.createdAt?.formatted() ?? "N/A")
                                     .padding(.leading, 20)
                                     .foregroundColor(Color("RecordingSFSymbleColor"))
                                 Spacer()
-                                Text("00:00")
+                                Text("\(Int(memo.duration))秒")
                                     .padding(.trailing, 20)
                                     .foregroundColor(Color("RecordingSFSymbleColor"))
                             }
@@ -136,15 +141,16 @@ extension  OftenUsedFolderView{
                         }
                         .frame(maxWidth: .infinity)
                     }
-                    if expandedIndex == index {
+                    if expandedIndex == memo.objectID.hashValue  {
                         VStack {
-                            SeekBarView()
+                            SeekBarView(voiceMemo: memo)
                         }
                         
                     }
                 }
             }
         }
-
     }
+    
 }
+

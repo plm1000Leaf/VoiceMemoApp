@@ -69,9 +69,8 @@
 		28A1EEB92CE5AA3B00D8F1C6 /* VoiceMemoApp */ = {
 			isa = PBXGroup;
 			children = (
-				28E0BB7D2CFDC35C000E910C /* Model */,
 				28A1EEBA2CE5AA3B00D8F1C6 /* VoiceMemoAppApp.swift */,
-				28E0BB772CFDAB20000E910C /* AppDelegate.swift */,
+				28E0BB7D2CFDC35C000E910C /* Model */,
 				28AB5EA92CE772E4001F4D83 /* View */,
 				28A1EEBE2CE5AA3E00D8F1C6 /* Assets.xcassets */,
 				28E0BB522CFD8A27000E910C /* DataServises */,
@@ -104,6 +103,7 @@
 		28E0BB522CFD8A27000E910C /* DataServises */ = {
 			isa = PBXGroup;
 			children = (
+				28E0BB772CFDAB20000E910C /* AppDelegate.swift */,
 				28E0BB562CFD8CD2000E910C /* Model.xcdatamodeld */,
 			);
 			path = DataServises;

@@ -7,9 +7,12 @@
 import SwiftUI
 
 struct SeekBarView: View {
+    @Environment(\.managedObjectContext) private var context
     @State private var currentTime: Double = 0
     @State private var isPlaying: Bool = false
     @State private var timer: Timer?
+    
+    let voiceMemo: VoiceMemoEntities
     //    全体の再生時間（仮に100秒とする）
     let totalTime: Double = 100
     // スキップする秒数
@@ -72,15 +75,28 @@ struct SeekBarView: View {
                 }
                 .foregroundColor(.black)
                 
-                Image(systemName: "trash")
-                    .foregroundColor(.blue)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .padding(.trailing, 30)
+                Button(action: deleteVoiceMemo) {
+                    Image(systemName: "trash")
+                        .foregroundColor(.blue)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding(.trailing, 30)
+                }
             }
             .font(.system(size: 27))
             
         }
     }
+    
+    private func deleteVoiceMemo() {
+        context.delete(voiceMemo) // 指定されたVoiceMemoEntitiesを削除
+        do {
+            try context.save() // コンテキストを保存
+            print("VoiceMemo削除成功: \(voiceMemo.title ?? "No Title")")
+        } catch {
+            print("VoiceMemo削除中にエラーが発生しました: \(error)")
+        }
+    }
+    
     
     private func startTimer() {
         stopTimer() // 既存のタイマーを停止して新しいタイマーを作成
@@ -93,6 +109,8 @@ struct SeekBarView: View {
             }
         }
     }
+   
+    
     
     private func stopTimer() {
         timer?.invalidate()
@@ -107,9 +125,9 @@ struct SeekBarView: View {
     }
 }
 
-struct SeekBarView_Previews: PreviewProvider {
-    static var previews: some View {
-        SeekBarView()
-    }
-}
+//struct SeekBarView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SeekBarView(voiceMemo: memo)
+//    }
+//}
 

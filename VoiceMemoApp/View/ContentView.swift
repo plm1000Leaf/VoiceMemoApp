@@ -8,6 +8,10 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var context
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \VoiceMemoEntities.createdAt, ascending: false)],
+        animation: .default
+    ) private var voiceMemos: FetchedResults<VoiceMemoEntities>
     @State private var textFieldText: String = ""
     @State private var expandedIndex: Int? = nil
     
@@ -36,10 +40,6 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
-
-
-
-
 
 
 
@@ -108,15 +108,10 @@ extension ContentView {
             .padding(.bottom, 5)
             
             VStack(spacing: 27) {
-                ForEach(0..<30, id: \.self) { index in
+                ForEach(voiceMemos, id: \.self) { memo in
                     Button(action: {
                         withAnimation {
-                            // 同じ場所をタップしたら閉じる
-                            if expandedIndex == index {
-                                expandedIndex = nil
-                            } else {
-                                expandedIndex = index
-                            }
+                    expandedIndex = (expandedIndex == memo.objectID.hashValue) ? nil : memo.objectID.hashValue
                         }
                     }){
                         VStack {
@@ -124,9 +119,8 @@ extension ContentView {
                                 .frame(width: 370, height: 1)
                                 .frame(maxHeight: .infinity, alignment: .trailing)
                                 .foregroundColor(Color("RecordingMemoLine"))
-                                .id(index) // IDを設定
                                 .padding(.top, 15)
-                            Text("新規録音\(index + 1)")
+                            Text(memo.title ?? "新規録音")
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .bold()
                                 .font(.system(size: 20))
@@ -134,11 +128,11 @@ extension ContentView {
                                 .foregroundColor(.black)
                             Spacer()
                             HStack{
-                                Text("2024/11/14")
+                                Text(memo.createdAt?.formatted() ?? "N/A")
                                     .padding(.leading, 20)
                                     .foregroundColor(Color("RecordingSFSymbleColor"))
                                 Spacer()
-                                Text("00:00")
+                                Text("\(Int(memo.duration))秒")
                                     .padding(.trailing, 20)
                                     .foregroundColor(Color("RecordingSFSymbleColor"))
                             }
@@ -147,9 +141,9 @@ extension ContentView {
                         }
                         .frame(maxWidth: .infinity)
                     }
-                    if expandedIndex == index {
+                    if expandedIndex == memo.objectID.hashValue  {
                         VStack {
-                            SeekBarView()
+                            SeekBarView(voiceMemo: memo)
                         }
                         
                     }
