@@ -11,6 +11,8 @@ import CoreData
 
 struct RecodingButtonView: View {
     let context: NSManagedObjectContext
+    typealias vmM = VoiceMemoModel
+
     @State private var showTab: Bool = false
     @State private var isRecording: Bool = false
     
@@ -27,7 +29,8 @@ struct RecodingButtonView: View {
                 Button(action: {
                     withAnimation {
                         if isRecording{
-                            addVoiceMemo()
+                            vmM.addVoiceMemo(title: "新しいメモ", duration: 120, context: context)
+                            
                         }
                         isRecording.toggle()
                         showTab.toggle()
@@ -48,32 +51,6 @@ struct RecodingButtonView: View {
 }
 
 extension RecodingButtonView {
-    
-    private func addVoiceMemo() {
-        // VoiceMemoEntitiesを作成
-        guard let entity = NSEntityDescription.entity(forEntityName: "VoiceMemoEntities", in: context) else {
-            print("VoiceMemoEntitiesのエンティティが見つかりません")
-            return
-        }
-        
-        // 正しい初期化を使用
-        let newMemo = VoiceMemoEntities(entity: entity, insertInto: context)
-        
-        newMemo.id = UUID()
-        newMemo.title = "New Memo \(Date())"
-        newMemo.filePath = "/path/to/new_memo.m4a"
-        newMemo.createdAt = Date()
-        newMemo.duration = Double.random(in: 60...300)
-        newMemo.location = "Unknown"
-        
-        // 保存処理
-        do {
-            try context.save()
-            print("新しいVoiceMemoが追加されました: \(newMemo.title ?? "No Title")")
-        } catch {
-            print("VoiceMemo追加中にエラーが発生しました: \(error)")
-        }
-    }
     
     
     private var showTabArea: some View {

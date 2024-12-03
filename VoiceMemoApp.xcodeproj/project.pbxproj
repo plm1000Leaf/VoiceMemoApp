@@ -20,6 +20,7 @@
 		28E0BB782CFDAB20000E910C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E0BB772CFDAB20000E910C /* AppDelegate.swift */; };
 		28E0BB7A2CFDC306000E910C /* VoiceMemoEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E0BB792CFDC306000E910C /* VoiceMemoEntities.swift */; };
 		28E0BB7C2CFDC32A000E910C /* VoiceMemoEntities+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E0BB7B2CFDC32A000E910C /* VoiceMemoEntities+CoreDataProperties.swift */; };
+		28E0BB7F2CFE99B1000E910C /* VoiceMemoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E0BB7E2CFE99B1000E910C /* VoiceMemoModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		28E0BB772CFDAB20000E910C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28E0BB792CFDC306000E910C /* VoiceMemoEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMemoEntities.swift; sourceTree = "<group>"; };
 		28E0BB7B2CFDC32A000E910C /* VoiceMemoEntities+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VoiceMemoEntities+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		28E0BB7E2CFE99B1000E910C /* VoiceMemoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMemoModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		28E0BB522CFD8A27000E910C /* DataServises */ = {
 			isa = PBXGroup;
 			children = (
+				28E0BB7E2CFE99B1000E910C /* VoiceMemoModel.swift */,
 				28E0BB772CFDAB20000E910C /* AppDelegate.swift */,
 				28E0BB562CFD8CD2000E910C /* Model.xcdatamodeld */,
 			);
@@ -192,6 +195,7 @@
 				28AB5EAD2CF5B372001F4D83 /* SeekBarView.swift in Sources */,
 				28A1EEBD2CE5AA3B00D8F1C6 /* ContentView.swift in Sources */,
 				28E0BB7A2CFDC306000E910C /* VoiceMemoEntities.swift in Sources */,
+				28E0BB7F2CFE99B1000E910C /* VoiceMemoModel.swift in Sources */,
 				28A1EEBB2CE5AA3B00D8F1C6 /* VoiceMemoAppApp.swift in Sources */,
 				28E0BB7C2CFDC32A000E910C /* VoiceMemoEntities+CoreDataProperties.swift in Sources */,
 				28AB5EAB2CEB0E32001F4D83 /* VoiceMemoFolderView.swift in Sources */,
