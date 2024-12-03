@@ -12,6 +12,7 @@ import CoreData
 struct RecodingButtonView: View {
     let context: NSManagedObjectContext
     @State private var showTab: Bool = false
+    @State private var isRecording: Bool = false
     
     var body: some View {
         VStack(spacing: 0){
@@ -25,7 +26,10 @@ struct RecodingButtonView: View {
                 
                 Button(action: {
                     withAnimation {
-                        addVoiceMemo()
+                        if isRecording{
+                            addVoiceMemo()
+                        }
+                        isRecording.toggle()
                         showTab.toggle()
                     }
                 })
@@ -51,17 +55,17 @@ extension RecodingButtonView {
             print("VoiceMemoEntitiesのエンティティが見つかりません")
             return
         }
-
+        
         // 正しい初期化を使用
         let newMemo = VoiceMemoEntities(entity: entity, insertInto: context)
-
+        
         newMemo.id = UUID()
         newMemo.title = "New Memo \(Date())"
         newMemo.filePath = "/path/to/new_memo.m4a"
         newMemo.createdAt = Date()
         newMemo.duration = Double.random(in: 60...300)
         newMemo.location = "Unknown"
-
+        
         // 保存処理
         do {
             try context.save()
@@ -70,24 +74,24 @@ extension RecodingButtonView {
             print("VoiceMemo追加中にエラーが発生しました: \(error)")
         }
     }
-
+    
     
     private var showTabArea: some View {
-            ZStack{
+        ZStack{
+            Rectangle()
+                .frame(width: 400, height:200)
+                .foregroundColor(Color("RecordingBottomColor"))
+                .frame(maxWidth: .infinity, alignment: .bottom)
+            
+            VStack{
+                Text("東京都")
+                Text("00:00:00")
+                Spacer().frame(height: 50)
                 Rectangle()
-                    .frame(width: 400, height:200)
-                    .foregroundColor(Color("RecordingBottomColor"))
-                    .frame(maxWidth: .infinity, alignment: .bottom)
+                    .frame(width: 400, height:1)
                 
-                VStack{
-                    Text("東京都")
-                    Text("00:00:00")
-                    Spacer().frame(height: 50)
-                    Rectangle()
-                        .frame(width: 400, height:1)
-                    
-                }
-                
+            }
+            
         }
         
     }
@@ -97,15 +101,25 @@ extension RecodingButtonView {
             Circle()
                 .stroke(Color("RecordingButtonLineColor"), lineWidth: 5)
                 .frame(width:80, height: 80)
-            Circle()
-                .foregroundColor(Color("RecordingButtonColor"))
-                .frame(width:65, height: 65)
+            if isRecording {
+                
+                RoundedRectangle(cornerRadius: 4)
+                    .fill(Color("RecordingButtonColor"))
+                    .frame(width: 30, height: 30)
+                
+            } else {
+                    Circle()
+                        .foregroundColor(Color("RecordingButtonColor"))
+                        .frame(width:65, height: 65)
+                }
             }
-    }
+        }
     
-    private var buttonBackArea: some View {
-        Rectangle()
-            .frame(width: 400, height: 130)
-            .foregroundColor(Color("RecordingBottomColor"))
+        
+        private var buttonBackArea: some View {
+            Rectangle()
+                .frame(width: 400, height: 130)
+                .foregroundColor(Color("RecordingBottomColor"))
+        }
     }
-}
+
