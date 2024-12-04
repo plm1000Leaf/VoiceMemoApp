@@ -132,7 +132,7 @@ extension ContentView {
                                     .padding(.leading, 20)
                                     .foregroundColor(Color("RecordingSFSymbleColor"))
                                 Spacer()
-                                Text("\(Int(memo.duration))秒")
+                                Text(VoiceMemoModel.formatTime(from: memo.duration ))
                                     .padding(.trailing, 20)
                                     .foregroundColor(Color("RecordingSFSymbleColor"))
                             }
