@@ -8,8 +8,10 @@ import Foundation
 import CoreData
 
 struct VoiceMemoModel {
+    
     static func addVoiceMemo(title: String, duration: Double, context: NSManagedObjectContext) {
         let newVoiceMemo = VoiceMemoEntities(context: context)
+        let date = Date()
         newVoiceMemo.title = title
         newVoiceMemo.duration = duration
         newVoiceMemo.createdAt = Date()
@@ -20,7 +22,14 @@ struct VoiceMemoModel {
             print("VoiceMemo追加中にエラーが発生しました: \(error)")
         }
     }
-
+    
+    static func formattedDate(from date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        return formatter.string(from: date)
+    }
+    
+    
     static func deleteVoiceMemo(_ voiceMemo: VoiceMemoEntities, context: NSManagedObjectContext) {
         context.delete(voiceMemo)
         do {
@@ -30,5 +39,6 @@ struct VoiceMemoModel {
             print("VoiceMemo削除中にエラーが発生しました: \(error)")
         }
     }
+    
 }
 

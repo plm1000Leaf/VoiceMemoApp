@@ -128,7 +128,7 @@ extension ContentView {
                                 .foregroundColor(.black)
                             Spacer()
                             HStack{
-                                Text(memo.createdAt?.formatted() ?? "N/A")
+                                Text(VoiceMemoModel.formattedDate(from: memo.createdAt ?? Date()))
                                     .padding(.leading, 20)
                                     .foregroundColor(Color("RecordingSFSymbleColor"))
                                 Spacer()
