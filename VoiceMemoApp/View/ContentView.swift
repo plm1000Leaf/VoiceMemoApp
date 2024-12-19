@@ -30,8 +30,11 @@ struct ContentView: View {
                         .onAppear {
                             proxy.scrollTo(0, anchor: .top)
                         }
-                    
-                    RecodingButtonView(context: context)
+                    if isEditing {
+                        EditBottomView()
+                    } else {
+                        RecodingButtonView(context: context)
+                    }
                 }
             }
         }
