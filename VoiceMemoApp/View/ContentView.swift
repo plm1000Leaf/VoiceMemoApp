@@ -100,7 +100,7 @@ extension ContentView {
                         .frame(width: 20, height: 30)
                         .frame(maxHeight: .infinity, alignment: .top)
                         .padding(.top, 10)
-                        .padding(.leading, 35)
+                        .padding(.leading, 45)
                         .foregroundColor(Color("RecordingSFSymbleColor"))
                     TextField("検索", text: $textFieldText)
                         .frame(maxHeight: .infinity, alignment: .top)
@@ -112,7 +112,7 @@ extension ContentView {
                         .frame(width: 20, height: 30)
                         .frame(maxHeight: .infinity, alignment: .top)
                         .padding(.top, 10)
-                        .padding(.trailing, 35)
+                        .padding(.trailing, 45)
                         .foregroundColor(Color("RecordingSFSymbleColor"))
                 }
             }
@@ -120,37 +120,78 @@ extension ContentView {
             
             VStack(spacing: 27) {
                 ForEach(voiceMemos, id: \.self) { memo in
-                    Button(action: {
-                        withAnimation {
-                    expandedIndex = (expandedIndex == memo.objectID.hashValue) ? nil : memo.objectID.hashValue
-                        }
-                    }){
-                        VStack {
-                            Rectangle()
-                                .frame(width: 370, height: 1)
-                                .frame(maxHeight: .infinity, alignment: .trailing)
-                                .foregroundColor(Color("RecordingMemoLine"))
-                                .padding(.top, 15)
-                            Text(memo.location ?? "不明な場所")
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .bold()
-                                .font(.system(size: 20))
-                                .padding(.leading, 20)
-                                .foregroundColor(.black)
-                            Spacer()
-                            HStack{
-                                Text(VoiceMemoModel.formattedDate(from: memo.createdAt ?? Date()))
-                                    .padding(.leading, 20)
-                                    .foregroundColor(Color("RecordingSFSymbleColor"))
-                                Spacer()
-                                Text(VoiceMemoModel.formatTime(from: memo.duration ))
-                                    .padding(.trailing, 20)
-                                    .foregroundColor(Color("RecordingSFSymbleColor"))
-                            }
-                            .padding(.bottom, -60)
+                    
+                    if isEditing {
+                        ZStack() {
                             
+                            VStack {
+                                Rectangle()
+                                    .frame(width: 370, height: 1)
+                                    .frame(maxHeight: .infinity, alignment: .trailing)
+                                    .foregroundColor(Color("RecordingMemoLine"))
+                                    .padding(.top, 15)
+                                Text(memo.location ?? "不明な場所")
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .bold()
+                                    .font(.system(size: 20))
+                                    .padding(.leading, 20)
+                                    .foregroundColor(.black)
+                                Spacer()
+                                HStack{
+                                    Text(VoiceMemoModel.formattedDate(from: memo.createdAt ?? Date()))
+                                        .padding(.leading, 20)
+                                        .foregroundColor(Color("RecordingSFSymbleColor"))
+                                    Spacer()
+                                    Text(VoiceMemoModel.formatTime(from: memo.duration ))
+                                        .padding(.trailing, 20)
+                                        .foregroundColor(Color("RecordingSFSymbleColor"))
+                                }
+                                .padding(.bottom, -60)
+                                
+                            }
+                            .padding(.leading, 60)
+                            .frame(maxWidth: .infinity)
+                            
+                            Circle()
+                                .stroke()
+                                .bold()
+                                .foregroundColor(Color("RecordingMemoLine"))
+                                .frame(width: 25, height: 25)
+                                .offset(x: -160, y: 30)
                         }
-                        .frame(maxWidth: .infinity)
+                    } else {
+                        Button(action: {
+                            withAnimation {
+                                expandedIndex = (expandedIndex == memo.objectID.hashValue) ? nil : memo.objectID.hashValue
+                            }
+                        }){
+                            VStack {
+                                Rectangle()
+                                    .frame(width: 370, height: 1)
+                                    .frame(maxHeight: .infinity, alignment: .trailing)
+                                    .foregroundColor(Color("RecordingMemoLine"))
+                                    .padding(.top, 15)
+                                Text(memo.location ?? "不明な場所")
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .bold()
+                                    .font(.system(size: 20))
+                                    .padding(.leading, 20)
+                                    .foregroundColor(.black)
+                                Spacer()
+                                HStack{
+                                    Text(VoiceMemoModel.formattedDate(from: memo.createdAt ?? Date()))
+                                        .padding(.leading, 20)
+                                        .foregroundColor(Color("RecordingSFSymbleColor"))
+                                    Spacer()
+                                    Text(VoiceMemoModel.formatTime(from: memo.duration ))
+                                        .padding(.trailing, 20)
+                                        .foregroundColor(Color("RecordingSFSymbleColor"))
+                                }
+                                .padding(.bottom, -60)
+                                
+                            }
+                            .frame(maxWidth: .infinity)
+                        }
                     }
                     if expandedIndex == memo.objectID.hashValue  {
                         VStack {
