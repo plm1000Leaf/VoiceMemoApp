@@ -21,6 +21,8 @@
 		28E0BB7A2CFDC306000E910C /* VoiceMemoEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E0BB792CFDC306000E910C /* VoiceMemoEntities.swift */; };
 		28E0BB7C2CFDC32A000E910C /* VoiceMemoEntities+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E0BB7B2CFDC32A000E910C /* VoiceMemoEntities+CoreDataProperties.swift */; };
 		28E0BB7F2CFE99B1000E910C /* VoiceMemoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E0BB7E2CFE99B1000E910C /* VoiceMemoModel.swift */; };
+		28FB4FFB2D027DBD009C4E5A /* HorizontalSwipeVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FB4FFA2D027DBD009C4E5A /* HorizontalSwipeVIew.swift */; };
+		28FB4FFD2D0295B7009C4E5A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FB4FFC2D0295B7009C4E5A /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		28E0BB792CFDC306000E910C /* VoiceMemoEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMemoEntities.swift; sourceTree = "<group>"; };
 		28E0BB7B2CFDC32A000E910C /* VoiceMemoEntities+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VoiceMemoEntities+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		28E0BB7E2CFE99B1000E910C /* VoiceMemoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMemoModel.swift; sourceTree = "<group>"; };
+		28FB4FFA2D027DBD009C4E5A /* HorizontalSwipeVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalSwipeVIew.swift; sourceTree = "<group>"; };
+		28FB4FFC2D0295B7009C4E5A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				28A1EEBA2CE5AA3B00D8F1C6 /* VoiceMemoAppApp.swift */,
+				28FB4FFC2D0295B7009C4E5A /* LocationManager.swift */,
 				28E0BB7D2CFDC35C000E910C /* Model */,
 				28AB5EA92CE772E4001F4D83 /* View */,
 				28A1EEBE2CE5AA3E00D8F1C6 /* Assets.xcassets */,
@@ -98,6 +103,7 @@
 				28AB5EAE2CF5E0CE001F4D83 /* RecodingButtonView.swift */,
 				28B04C1B2CF9A15D004E6115 /* DeletedFolderView.swift */,
 				28B04C1F2CF9B26F004E6115 /* OftenUsedFolderView.swift */,
+				28FB4FFA2D027DBD009C4E5A /* HorizontalSwipeVIew.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -201,8 +207,10 @@
 				28AB5EAB2CEB0E32001F4D83 /* VoiceMemoFolderView.swift in Sources */,
 				28B04C202CF9B26F004E6115 /* OftenUsedFolderView.swift in Sources */,
 				28B04C1C2CF9A15D004E6115 /* DeletedFolderView.swift in Sources */,
+				28FB4FFD2D0295B7009C4E5A /* LocationManager.swift in Sources */,
 				28E0BB582CFD8CD2000E910C /* Model.xcdatamodeld in Sources */,
 				28AB5EAF2CF5E0CE001F4D83 /* RecodingButtonView.swift in Sources */,
+				28FB4FFB2D027DBD009C4E5A /* HorizontalSwipeVIew.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +346,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"VoiceMemoApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "位置情報を取得して表示します。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -366,6 +375,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"VoiceMemoApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "位置情報を取得して表示します。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

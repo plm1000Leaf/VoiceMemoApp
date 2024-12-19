@@ -9,12 +9,14 @@ import CoreData
 
 struct VoiceMemoModel {
     
-    static func addVoiceMemo(title: String, duration: Double, context: NSManagedObjectContext) {
+    static func addVoiceMemo(title: String, duration: Double, context: NSManagedObjectContext,location: String? = nil) {
         let newVoiceMemo = VoiceMemoEntities(context: context)
-        let date = Date()
         newVoiceMemo.title = title
+//        let date = Date()
         newVoiceMemo.duration = duration
         newVoiceMemo.createdAt = Date()
+        newVoiceMemo.location = location
+        
         do {
             try context.save()
             print("VoiceMemo追加成功: \(title)")

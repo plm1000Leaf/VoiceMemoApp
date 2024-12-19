@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct ContentView: View {
+
     @Environment(\.managedObjectContext) private var context
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \VoiceMemoEntities.createdAt, ascending: false)],
@@ -14,6 +15,8 @@ struct ContentView: View {
     ) private var voiceMemos: FetchedResults<VoiceMemoEntities>
     @State private var textFieldText: String = ""
     @State private var expandedIndex: Int? = nil
+    @State private var isEditing: Bool = false
+    @StateObject private var locationManager = LocationManager()
     
     var body: some View {
         NavigationStack{
@@ -57,11 +60,16 @@ extension ContentView {
                     .bold()
             }
             .navigationBarBackButtonHidden(true)
-            Text("編集")
-                .font(.system(size: 20))
-                .foregroundColor(.blue)
-                .padding(.trailing, 20)
-                .bold()
+            
+            Button(action: {
+                isEditing.toggle() // 編集モードを切り替える
+            }){
+                Text(isEditing ? "キャンセル" : "編集")
+                    .font(.system(size: 20))
+                    .foregroundColor(.blue)
+                    .padding(.trailing, 20)
+                    .bold()
+            }
         }
     }
     
@@ -120,7 +128,7 @@ extension ContentView {
                                 .frame(maxHeight: .infinity, alignment: .trailing)
                                 .foregroundColor(Color("RecordingMemoLine"))
                                 .padding(.top, 15)
-                            Text(memo.title ?? "新規録音")
+                            Text(memo.location ?? "不明な場所")
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .bold()
                                 .font(.system(size: 20))
@@ -152,4 +160,17 @@ extension ContentView {
         }
     }
     
+    private func addVoiceMemoWithLocation() {
+        // LocationManagerから位置情報を取得
+        let location = locationManager.location ?? "不明な場所"
+        let title = "新規録音 (\(location))"
+        
+        // Core Dataに新しいメモを追加
+        VoiceMemoModel.addVoiceMemo(
+            title: title,
+            duration: 120.0, // 仮の録音時間
+            context: context
+        )
+    }
 }
+
