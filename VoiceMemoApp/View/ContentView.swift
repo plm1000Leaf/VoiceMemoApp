@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ContentView: View {
 
@@ -16,6 +17,7 @@ struct ContentView: View {
     @State private var textFieldText: String = ""
     @State private var expandedIndex: Int? = nil
     @State private var isEditing: Bool = false
+    @State private var selectedMemos: Set<NSManagedObjectID> = []
     @StateObject private var locationManager = LocationManager()
     
     var body: some View {
@@ -153,11 +155,15 @@ extension ContentView {
                             .frame(maxWidth: .infinity)
                             
                             Circle()
-                                .stroke()
-                                .bold()
-                                .foregroundColor(Color("RecordingMemoLine"))
+                                .fill(selectedMemos.contains(memo.objectID) ? Color.blue : Color.clear)
+                                .overlay(
+                                    Circle().stroke(Color("RecordingMemoLine"), lineWidth: 2)
+                                )
                                 .frame(width: 25, height: 25)
                                 .offset(x: -160, y: 30)
+                                .onTapGesture {
+                                    toggleSelection(for: memo.objectID)
+                                }
                         }
                     } else {
                         Button(action: {
@@ -204,6 +210,16 @@ extension ContentView {
         }
     }
     
+    
+    private func toggleSelection(for id: NSManagedObjectID) {
+        if selectedMemos.contains(id) {
+            selectedMemos.remove(id)
+        } else {
+            selectedMemos.insert(id)
+        }
+    }
+        
+        
     private func addVoiceMemoWithLocation() {
         // LocationManagerから位置情報を取得
         let location = locationManager.location ?? "不明な場所"
