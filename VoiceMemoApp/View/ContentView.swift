@@ -124,6 +124,9 @@ extension ContentView {
                 ForEach(voiceMemos, id: \.self) { memo in
                     
                     if isEditing {
+                        Button(action: {
+                            toggleSelection(for: memo.objectID)
+                        }){
                         ZStack() {
                             
                             VStack {
@@ -161,10 +164,8 @@ extension ContentView {
                                 )
                                 .frame(width: 25, height: 25)
                                 .offset(x: -160, y: 30)
-                                .onTapGesture {
-                                    toggleSelection(for: memo.objectID)
-                                }
                         }
+                    }
                     } else {
                         Button(action: {
                             withAnimation {
