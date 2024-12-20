@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct EditBottomView: View {
+    @Binding var selectedMemos: Set<NSManagedObjectID> 
     
     var deleteAction: () -> Void
     
@@ -21,20 +23,17 @@ struct EditBottomView: View {
                 Image(systemName: "folder.badge.plus")
                     .padding(.leading, 35)
                     .font(.system(size: 25))
-                    .foregroundColor(Color("RecordingSFSymbleColor"))
+                    .foregroundColor(selectedMemos.isEmpty ? Color("RecordingSFSymbleColor") : Color.blue)
                 Spacer()
                 Button(action: deleteAction) {
                     Image(systemName: "trash")
                         .padding(.trailing, 35)
                         .font(.system(size: 25))
-                        .foregroundColor(Color("RecordingSFSymbleColor"))
+                        .foregroundColor(selectedMemos.isEmpty ? Color("RecordingSFSymbleColor") : Color.blue)
+                        
                 }
             }
             
         }
     }
-}
-
-#Preview {
-    EditBottomView(deleteAction: {})
 }

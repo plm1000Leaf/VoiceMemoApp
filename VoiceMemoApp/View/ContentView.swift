@@ -33,7 +33,7 @@ struct ContentView: View {
                             proxy.scrollTo(0, anchor: .top)
                         }
                     if isEditing {
-                        EditBottomView(deleteAction: editModeDeleteMemos)
+                        EditBottomView(selectedMemos: $selectedMemos,deleteAction: editModeDeleteMemos)
                     } else {
                         RecodingButtonView(context: context)
                     }
