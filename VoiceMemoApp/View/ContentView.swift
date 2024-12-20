@@ -79,13 +79,24 @@ extension ContentView {
     }
     
     private var titleArea: some View {
-        Text("すべての録音")
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .font(.largeTitle)
-            .padding(.leading, 20)
-            .padding([.top, .bottom], 5)
-            .bold()
-            .font(.system(size: 100))
+        if isEditing{
+            Text("\(selectedMemos.count)件選択")
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .font(.largeTitle)
+                .padding(.leading, 20)
+                .padding([.top, .bottom], 5)
+                .bold()
+                .font(.system(size: 100))
+            
+        } else {
+            Text("すべての録音")
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .font(.largeTitle)
+                .padding(.leading, 20)
+                .padding([.top, .bottom], 5)
+                .bold()
+                .font(.system(size: 100))
+        }
     }
     
     private var scrollArea: some View{
