@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct EditBottomView: View {
+    
+    var deleteAction: () -> Void
+    
     var body: some View {
         ZStack{
             Rectangle()
@@ -20,10 +23,12 @@ struct EditBottomView: View {
                     .font(.system(size: 25))
                     .foregroundColor(Color("RecordingSFSymbleColor"))
                 Spacer()
-                Image(systemName: "trash")
-                    .padding(.trailing, 35)
-                    .font(.system(size: 25))
-                    .foregroundColor(Color("RecordingSFSymbleColor"))
+                Button(action: deleteAction) {
+                    Image(systemName: "trash")
+                        .padding(.trailing, 35)
+                        .font(.system(size: 25))
+                        .foregroundColor(Color("RecordingSFSymbleColor"))
+                }
             }
             
         }
@@ -31,5 +36,5 @@ struct EditBottomView: View {
 }
 
 #Preview {
-    EditBottomView()
+    EditBottomView(deleteAction: {})
 }

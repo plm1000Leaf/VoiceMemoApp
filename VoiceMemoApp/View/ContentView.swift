@@ -33,7 +33,7 @@ struct ContentView: View {
                             proxy.scrollTo(0, anchor: .top)
                         }
                     if isEditing {
-                        EditBottomView()
+                        EditBottomView(deleteAction: editModeDeleteMemos)
                     } else {
                         RecodingButtonView(context: context)
                     }
@@ -232,6 +232,20 @@ extension ContentView {
             duration: 120.0, // 仮の録音時間
             context: context
         )
+    }
+    
+    private func editModeDeleteMemos() {
+        selectedMemos.forEach { objectID in
+            if let memo = voiceMemos.first(where: { $0.objectID == objectID }) {
+                context.delete(memo)
+            }
+        }
+        do {
+            try context.save()
+            selectedMemos.removeAll() // 削除後に選択をクリア
+        } catch {
+            print("削除中にエラーが発生しました: \(error)")
+        }
     }
 }
 

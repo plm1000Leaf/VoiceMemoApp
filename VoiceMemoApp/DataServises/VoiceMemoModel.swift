@@ -38,7 +38,7 @@ struct VoiceMemoModel {
    }
 
     
-    static func deleteVoiceMemo(_ voiceMemo: VoiceMemoEntities, context: NSManagedObjectContext) {
+    static func seekBarDeleteVoiceMemo(_ voiceMemo: VoiceMemoEntities, context: NSManagedObjectContext) {
         context.delete(voiceMemo)
         do {
             try context.save()

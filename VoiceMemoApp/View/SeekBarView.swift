@@ -76,7 +76,7 @@ struct SeekBarView: View {
                 .foregroundColor(.black)
                 
                 Button(action: {
-                    vmM.deleteVoiceMemo(voiceMemo, context: context)
+                    vmM.seekBarDeleteVoiceMemo(voiceMemo, context: context)
                 }) {
                     Image(systemName: "trash")
                         .foregroundColor(.blue)
