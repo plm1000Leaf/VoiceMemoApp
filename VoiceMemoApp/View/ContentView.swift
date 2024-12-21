@@ -189,7 +189,7 @@ extension ContentView {
                                     .frame(maxHeight: .infinity, alignment: .trailing)
                                     .foregroundColor(Color("RecordingMemoLine"))
                                     .padding(.top, 15)
-                                Text(memo.location ?? "不明な場所")
+                                Text(locationManager.location ?? "不明な場所")
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .bold()
                                     .font(.system(size: 20))
@@ -241,7 +241,8 @@ extension ContentView {
         VoiceMemoModel.addVoiceMemo(
             title: title,
             duration: 120.0, // 仮の録音時間
-            context: context
+            context: context,
+            location: location
         )
     }
     
