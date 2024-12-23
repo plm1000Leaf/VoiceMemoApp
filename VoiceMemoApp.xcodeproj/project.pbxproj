@@ -17,6 +17,7 @@
 		28AB5EAF2CF5E0CE001F4D83 /* RecodingButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB5EAE2CF5E0CE001F4D83 /* RecodingButtonView.swift */; };
 		28B04C1C2CF9A15D004E6115 /* DeletedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B04C1B2CF9A15D004E6115 /* DeletedFolderView.swift */; };
 		28B04C202CF9B26F004E6115 /* OftenUsedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B04C1F2CF9B26F004E6115 /* OftenUsedFolderView.swift */; };
+		28B09C142D1985E80007ED16 /* EditMemoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B09C132D1985E80007ED16 /* EditMemoRowView.swift */; };
 		28E0BB582CFD8CD2000E910C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28E0BB562CFD8CD2000E910C /* Model.xcdatamodeld */; };
 		28E0BB782CFDAB20000E910C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E0BB772CFDAB20000E910C /* AppDelegate.swift */; };
 		28E0BB7A2CFDC306000E910C /* VoiceMemoEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E0BB792CFDC306000E910C /* VoiceMemoEntities.swift */; };
@@ -37,6 +38,7 @@
 		28AB5EAE2CF5E0CE001F4D83 /* RecodingButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecodingButtonView.swift; sourceTree = "<group>"; };
 		28B04C1B2CF9A15D004E6115 /* DeletedFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedFolderView.swift; sourceTree = "<group>"; };
 		28B04C1F2CF9B26F004E6115 /* OftenUsedFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OftenUsedFolderView.swift; sourceTree = "<group>"; };
+		28B09C132D1985E80007ED16 /* EditMemoRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemoRowView.swift; sourceTree = "<group>"; };
 		28E0BB572CFD8CD2000E910C /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		28E0BB772CFDAB20000E910C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28E0BB792CFDC306000E910C /* VoiceMemoEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMemoEntities.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				28A157F72D13A31A006EF321 /* EditBottomView.swift */,
 				28B04C1B2CF9A15D004E6115 /* DeletedFolderView.swift */,
 				28B04C1F2CF9B26F004E6115 /* OftenUsedFolderView.swift */,
+				28B09C132D1985E80007ED16 /* EditMemoRowView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28B09C142D1985E80007ED16 /* EditMemoRowView.swift in Sources */,
 				28E0BB782CFDAB20000E910C /* AppDelegate.swift in Sources */,
 				28AB5EAD2CF5B372001F4D83 /* SeekBarView.swift in Sources */,
 				28A1EEBD2CE5AA3B00D8F1C6 /* ContentView.swift in Sources */,

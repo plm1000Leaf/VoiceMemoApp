@@ -17,6 +17,8 @@ struct ContentView: View {
     @State private var textFieldText: String = ""
     @State private var expandedIndex: Int? = nil
     @State private var isEditing: Bool = false
+    @State private var isEditingTitle: Bool = false
+    @State private var editableText: String = ""
     @State private var selectedMemos: Set<NSManagedObjectID> = []
     @StateObject private var locationManager = LocationManager()
     
@@ -138,44 +140,8 @@ extension ContentView {
                         Button(action: {
                             toggleSelection(for: memo.objectID)
                         }){
-                        ZStack() {
-                            
-                            VStack {
-                                Rectangle()
-                                    .frame(width: 370, height: 1)
-                                    .frame(maxHeight: .infinity, alignment: .trailing)
-                                    .foregroundColor(Color("RecordingMemoLine"))
-                                    .padding(.top, 15)
-                                Text(memo.location ?? "不明な場所")
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .bold()
-                                    .font(.system(size: 20))
-                                    .padding(.leading, 20)
-                                    .foregroundColor(.black)
-                                Spacer()
-                                HStack{
-                                    Text(VoiceMemoModel.formattedDate(from: memo.createdAt ?? Date()))
-                                        .padding(.leading, 20)
-                                        .foregroundColor(Color("RecordingSFSymbleColor"))
-                                    Spacer()
-                                    Text(VoiceMemoModel.formatTime(from: memo.duration ))
-                                        .padding(.trailing, 20)
-                                        .foregroundColor(Color("RecordingSFSymbleColor"))
-                                }
-                                .padding(.bottom, -60)
-                                
-                            }
-                            .padding(.leading, 60)
-                            .frame(maxWidth: .infinity)
-                            
-                            Circle()
-                                .fill(selectedMemos.contains(memo.objectID) ? Color.blue : Color.clear)
-                                .overlay(
-                                    Circle().stroke(Color("RecordingMemoLine"), lineWidth: 2)
-                                )
-                                .frame(width: 25, height: 25)
-                                .offset(x: -160, y: 30)
-                        }
+                        
+                            EditMemoRowView(memo: memo, isSelected: selectedMemos.contains(memo.objectID)).contentShape(Rectangle())
                     }
                     } else {
                         Button(action: {
@@ -189,12 +155,40 @@ extension ContentView {
                                     .frame(maxHeight: .infinity, alignment: .trailing)
                                     .foregroundColor(Color("RecordingMemoLine"))
                                     .padding(.top, 15)
-                                Text(locationManager.location ?? "不明な場所")
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .bold()
-                                    .font(.system(size: 20))
-                                    .padding(.leading, 20)
-                                    .foregroundColor(.black)
+                                if isEditingTitle {
+                                            TextField(
+                                                "場所を入力してください",
+                                                text: $editableText,
+                                                        onCommit: {
+                                                            isEditingTitle = false
+                                                            locationManager.location = editableText
+                                                        }
+                                                    )
+                                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                                            .padding(.leading, 20)
+                                        } else {
+                                    Text(locationManager.location ?? "不明な場所")
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .bold()
+                                        .font(.system(size: 20))
+                                        .padding(.leading, 20)
+                                        .foregroundColor(.black)
+                                        .onTapGesture {
+                                            if !isEditing && expandedIndex == memo.objectID.hashValue {
+                                                isEditingTitle = true
+                                                editableText = locationManager.location ?? "不明な場所"
+                                            }
+                                        }
+                                }
+                                
+                                
+                                
+//                                Text(locationManager.location ?? "不明な場所")
+//                                    .frame(maxWidth: .infinity, alignment: .leading)
+//                                    .bold()
+//                                    .font(.system(size: 20))
+//                                    .padding(.leading, 20)
+//                                    .foregroundColor(.black)
                                 Spacer()
                                 HStack{
                                     Text(VoiceMemoModel.formattedDate(from: memo.createdAt ?? Date()))
@@ -245,6 +239,7 @@ extension ContentView {
             location: location
         )
     }
+
     
     private func editModeDeleteMemos() {
         selectedMemos.forEach { objectID in
