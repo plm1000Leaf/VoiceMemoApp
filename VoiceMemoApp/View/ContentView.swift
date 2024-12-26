@@ -17,7 +17,8 @@ struct ContentView: View {
     @State private var textFieldText: String = ""
     @State private var expandedIndex: Int? = nil
     @State private var isEditing: Bool = false
-    @State private var isEditingTitle: Bool = false
+    @State private var editingMemoID: NSManagedObjectID? = nil
+//    @State private var isEditingTitle: Bool = false
     @State private var editableText: String = ""
     @State private var selectedMemos: Set<NSManagedObjectID> = []
     @StateObject private var locationManager = LocationManager()
@@ -37,7 +38,8 @@ struct ContentView: View {
                     if isEditing {
                         EditBottomView(selectedMemos: $selectedMemos,deleteAction: editModeDeleteMemos)
                     } else {
-                        RecodingButtonView(context: context)
+                        RecodingButtonView(context: context, addVoiceMemoWithLocation: addVoiceMemoWithLocation)
+
                     }
                 }
             }
@@ -155,19 +157,19 @@ extension ContentView {
                                     .frame(maxHeight: .infinity, alignment: .trailing)
                                     .foregroundColor(Color("RecordingMemoLine"))
                                     .padding(.top, 15)
-                                if isEditingTitle {
+                                if editingMemoID == memo.objectID {
                                             TextField(
-                                                "場所を入力してください",
+                                                "タイトルを入力してください",
                                                 text: $editableText,
                                                         onCommit: {
-                                                            isEditingTitle = false
-                                                            locationManager.location = editableText
+                                                            saveEditedTitle(for: memo)
+                                                            editingMemoID = nil
                                                         }
                                                     )
                                             .textFieldStyle(RoundedBorderTextFieldStyle())
                                             .padding(.leading, 20)
                                         } else {
-                                    Text(locationManager.location ?? "不明な場所")
+                                    Text(memo.title ?? "不明な場所")
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .bold()
                                         .font(.system(size: 20))
@@ -175,20 +177,12 @@ extension ContentView {
                                         .foregroundColor(.black)
                                         .onTapGesture {
                                             if !isEditing && expandedIndex == memo.objectID.hashValue {
-                                                isEditingTitle = true
-                                                editableText = locationManager.location ?? "不明な場所"
+                                                editingMemoID = memo.objectID
+                                                editableText = memo.title ?? ""
                                             }
                                         }
                                 }
                                 
-                                
-                                
-//                                Text(locationManager.location ?? "不明な場所")
-//                                    .frame(maxWidth: .infinity, alignment: .leading)
-//                                    .bold()
-//                                    .font(.system(size: 20))
-//                                    .padding(.leading, 20)
-//                                    .foregroundColor(.black)
                                 Spacer()
                                 HStack{
                                     Text(VoiceMemoModel.formattedDate(from: memo.createdAt ?? Date()))
@@ -229,7 +223,7 @@ extension ContentView {
     private func addVoiceMemoWithLocation() {
         // LocationManagerから位置情報を取得
         let location = locationManager.location ?? "不明な場所"
-        let title = "新規録音 (\(location))"
+        let title = location
         
         // Core Dataに新しいメモを追加
         VoiceMemoModel.addVoiceMemo(
@@ -240,7 +234,16 @@ extension ContentView {
         )
     }
 
-    
+    private func saveEditedTitle(for memo: VoiceMemoEntities) {
+        memo.title = editableText
+        do {
+            try context.save()
+            print("タイトル編集成功: \(editableText)")
+        } catch {
+            print("タイトル編集中にエラーが発生しました: \(error)")
+        }
+    }
+
     private func editModeDeleteMemos() {
         selectedMemos.forEach { objectID in
             if let memo = voiceMemos.first(where: { $0.objectID == objectID }) {

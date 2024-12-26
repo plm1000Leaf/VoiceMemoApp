@@ -27,8 +27,7 @@ struct DeletedFolderView: View {
                         .onAppear {
                             proxy.scrollTo(0, anchor: .top)
                         }
-                    
-                    RecodingButtonView(context: context)
+            
                 }
             }
         }

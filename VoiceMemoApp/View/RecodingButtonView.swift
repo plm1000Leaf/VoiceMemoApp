@@ -11,6 +11,8 @@ import CoreData
 
 struct RecodingButtonView: View {
     let context: NSManagedObjectContext
+    let addVoiceMemoWithLocation: () -> Void
+    
     typealias vmM = VoiceMemoModel
 
     @State private var showTab: Bool = false
@@ -44,11 +46,6 @@ struct RecodingButtonView: View {
     }
 }
 
-#Preview {
-    // コンテキストのモックを渡す
-    let previewContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    return RecodingButtonView(context: previewContext)
-}
 
 extension RecodingButtonView {
     
