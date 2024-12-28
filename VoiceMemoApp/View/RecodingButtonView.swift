@@ -17,6 +17,7 @@ struct RecodingButtonView: View {
 
     @State private var showTab: Bool = false
     @State private var isRecording: Bool = false
+    @StateObject private var locationManager = LocationManager()
     
     var body: some View {
         VStack(spacing: 0){
@@ -31,7 +32,7 @@ struct RecodingButtonView: View {
                 Button(action: {
                     withAnimation {
                         if isRecording{
-                            vmM.addVoiceMemo(title: "新しいメモ", duration: 120, context: context)
+                            vmM.addVoiceMemo(title: "初期", duration: 120, context: context)
                             
                         }
                         isRecording.toggle()
@@ -95,5 +96,7 @@ extension RecodingButtonView {
                 .frame(width: 400, height: 130)
                 .foregroundColor(Color("RecordingBottomColor"))
         }
+
+
     }
 

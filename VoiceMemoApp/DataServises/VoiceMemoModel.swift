@@ -8,11 +8,10 @@ import Foundation
 import CoreData
 
 struct VoiceMemoModel {
-    
+
     static func addVoiceMemo(title: String, duration: Double, context: NSManagedObjectContext,location: String? = nil) {
         let newVoiceMemo = VoiceMemoEntities(context: context)
         newVoiceMemo.title = title
-//        let date = Date()
         newVoiceMemo.duration = duration
         newVoiceMemo.createdAt = Date()
         newVoiceMemo.location = location

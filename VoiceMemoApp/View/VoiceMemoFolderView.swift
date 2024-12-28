@@ -8,6 +8,10 @@ import SwiftUI
 
 struct VoiceMemoFolderView: View {
     @State private var textFieldText: String = ""
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \VoiceMemoEntities.createdAt, ascending: false)],
+        animation: .default
+    ) private var voiceMemos: FetchedResults<VoiceMemoEntities>
     
     var body: some View {
         NavigationStack{
@@ -112,7 +116,7 @@ extension VoiceMemoFolderView {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(.leading, -50)
                                     .foregroundColor(.black)
-                                Text("3")
+                                Text("\(voiceMemos.count)")
                                     .foregroundColor(Color("DataCount"))
                                 Image(systemName: "chevron.right")
                                     .foregroundColor(Color("ListLine"))
