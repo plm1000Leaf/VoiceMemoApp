@@ -36,7 +36,10 @@ struct VoiceMemoFolderView: View {
                 .navigationBarBackButtonHidden(true)
             }
             if isAddFolder {
-                AddFolderView(isAddFolder: $isAddFolder) 
+                AddFolderView(
+                    textFieldText: $textFieldText, 
+                    isAddFolder: $isAddFolder
+                )
                      .onTapGesture {
                          // 背景タップでモーダルを閉じる
                          isAddFolder = false
@@ -175,6 +178,11 @@ extension VoiceMemoFolderView {
                         .padding(.trailing, 50)
                         .bold()
                 }
+                if !textFieldText.isEmpty {
+                      Text("フォルダ名: \(textFieldText)")
+                          .foregroundColor(.black)
+                          .padding(.top, 10)
+                  }
             }
         }
     }

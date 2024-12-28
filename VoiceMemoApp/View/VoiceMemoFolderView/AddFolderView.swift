@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddFolderView: View {
-    @State private var textFieldText: String = ""
+    @Binding var textFieldText: String 
     @Binding var isAddFolder: Bool
     var body: some View {
         ZStack {
@@ -57,6 +57,9 @@ struct AddFolderView: View {
                         .bold()
                         .foregroundColor(Color("DataCount"))
                         .offset(x:28,y: -5)
+                        .onTapGesture {
+                            isAddFolder = false // 保存して閉じる
+                        }
                 }
             }
         }
