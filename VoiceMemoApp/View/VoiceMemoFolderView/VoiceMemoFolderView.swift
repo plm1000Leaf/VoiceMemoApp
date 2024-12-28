@@ -8,33 +8,42 @@ import SwiftUI
 
 struct VoiceMemoFolderView: View {
     @State private var textFieldText: String = ""
+    @State private var isAddFolder: Bool = false
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \VoiceMemoEntities.createdAt, ascending: false)],
         animation: .default
     ) private var voiceMemos: FetchedResults<VoiceMemoEntities>
     
     var body: some View {
-        NavigationStack{
-            VStack {
-
-                headerArea
-                titleArea
-
-                Spacer()
-                
-                ScrollView {
+        ZStack{
+            NavigationStack{
+                VStack {
                     
-                    topFolderListArea
-                    bottomFolderListArea
-                
+                    headerArea
+                    titleArea
+                    
+                    Spacer()
+                    
+                    ScrollView {
+                        
+                        topFolderListArea
+                        bottomFolderListArea
+                        
+                    }
+                    footerArea
                 }
-                footerArea
+                .background(Color("Background"))
+                .navigationBarBackButtonHidden(true)
             }
-            .background(Color("Background"))
-            .navigationBarBackButtonHidden(true)
+            if isAddFolder {
+                AddFolderView(isAddFolder: $isAddFolder) 
+                     .onTapGesture {
+                         // 背景タップでモーダルを閉じる
+                         isAddFolder = false
+                     }
+            }
         }
     }
-   
 //    関数ハンドル
     @ViewBuilder
     private func destinationView(for index: Int) -> some View {
@@ -171,11 +180,16 @@ extension VoiceMemoFolderView {
     }
     
     private var footerArea: some View {
-        Image(systemName: "folder.badge.plus")
-            .frame(maxWidth: .infinity, alignment: .trailing)
-            .padding(.trailing, 30)
-            .font(.system(size: 30))
-            .foregroundColor(.blue)
+        Button {
+            isAddFolder.toggle()
+        } label: {
+            Image(systemName: "folder.badge.plus")
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.trailing, 30)
+                .font(.system(size: 30))
+                .foregroundColor(.blue)
+        }
+
     }
     
 }

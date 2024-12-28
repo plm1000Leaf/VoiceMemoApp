@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2834E5EA2D1F78B40034B87A /* SelectFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2834E5E92D1F78B40034B87A /* SelectFolderView.swift */; };
+		2834E5EE2D1F86460034B87A /* AddFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2834E5ED2D1F86460034B87A /* AddFolderView.swift */; };
 		28A157F82D13A31A006EF321 /* EditBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A157F72D13A31A006EF321 /* EditBottomView.swift */; };
 		28A1EEBB2CE5AA3B00D8F1C6 /* VoiceMemoAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A1EEBA2CE5AA3B00D8F1C6 /* VoiceMemoAppApp.swift */; };
 		28A1EEBD2CE5AA3B00D8F1C6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A1EEBC2CE5AA3B00D8F1C6 /* ContentView.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		2834E5E92D1F78B40034B87A /* SelectFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFolderView.swift; sourceTree = "<group>"; };
+		2834E5ED2D1F86460034B87A /* AddFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFolderView.swift; sourceTree = "<group>"; };
 		28A157F72D13A31A006EF321 /* EditBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBottomView.swift; sourceTree = "<group>"; };
 		28A1EEB72CE5AA3B00D8F1C6 /* VoiceMemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceMemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28A1EEBA2CE5AA3B00D8F1C6 /* VoiceMemoAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMemoAppApp.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 		2834E5E82D1F78440034B87A /* VoiceMemoFolderView */ = {
 			isa = PBXGroup;
 			children = (
+				2834E5ED2D1F86460034B87A /* AddFolderView.swift */,
 				28AB5EAA2CEB0E32001F4D83 /* VoiceMemoFolderView.swift */,
 			);
 			path = VoiceMemoFolderView;
@@ -230,6 +233,7 @@
 				2834E5EA2D1F78B40034B87A /* SelectFolderView.swift in Sources */,
 				28E0BB7C2CFDC32A000E910C /* VoiceMemoEntities+CoreDataProperties.swift in Sources */,
 				28AB5EAB2CEB0E32001F4D83 /* VoiceMemoFolderView.swift in Sources */,
+				2834E5EE2D1F86460034B87A /* AddFolderView.swift in Sources */,
 				28B04C202CF9B26F004E6115 /* OftenUsedFolderView.swift in Sources */,
 				28B04C1C2CF9A15D004E6115 /* DeletedFolderView.swift in Sources */,
 				28FB4FFD2D0295B7009C4E5A /* LocationManager.swift in Sources */,
