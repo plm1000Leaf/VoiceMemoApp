@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2834E5EA2D1F78B40034B87A /* SelectFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2834E5E92D1F78B40034B87A /* SelectFolderView.swift */; };
 		28A157F82D13A31A006EF321 /* EditBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A157F72D13A31A006EF321 /* EditBottomView.swift */; };
 		28A1EEBB2CE5AA3B00D8F1C6 /* VoiceMemoAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A1EEBA2CE5AA3B00D8F1C6 /* VoiceMemoAppApp.swift */; };
 		28A1EEBD2CE5AA3B00D8F1C6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A1EEBC2CE5AA3B00D8F1C6 /* ContentView.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2834E5E92D1F78B40034B87A /* SelectFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFolderView.swift; sourceTree = "<group>"; };
 		28A157F72D13A31A006EF321 /* EditBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBottomView.swift; sourceTree = "<group>"; };
 		28A1EEB72CE5AA3B00D8F1C6 /* VoiceMemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceMemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28A1EEBA2CE5AA3B00D8F1C6 /* VoiceMemoAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMemoAppApp.swift; sourceTree = "<group>"; };
@@ -58,6 +60,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2834E5E72D1F78200034B87A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2834E5E82D1F78440034B87A /* VoiceMemoFolderView */,
+				28AB5EA92CE772E4001F4D83 /* ContentView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2834E5E82D1F78440034B87A /* VoiceMemoFolderView */ = {
+			isa = PBXGroup;
+			children = (
+				28AB5EAA2CEB0E32001F4D83 /* VoiceMemoFolderView.swift */,
+			);
+			path = VoiceMemoFolderView;
+			sourceTree = "<group>";
+		};
 		28A1EEAE2CE5AA3B00D8F1C6 = {
 			isa = PBXGroup;
 			children = (
@@ -79,8 +98,8 @@
 			children = (
 				28A1EEBA2CE5AA3B00D8F1C6 /* VoiceMemoAppApp.swift */,
 				28FB4FFC2D0295B7009C4E5A /* LocationManager.swift */,
+				2834E5E72D1F78200034B87A /* View */,
 				28E0BB7D2CFDC35C000E910C /* Model */,
-				28AB5EA92CE772E4001F4D83 /* View */,
 				28A1EEBE2CE5AA3E00D8F1C6 /* Assets.xcassets */,
 				28E0BB522CFD8A27000E910C /* DataServises */,
 				28A1EEC02CE5AA3E00D8F1C6 /* Preview Content */,
@@ -96,19 +115,19 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		28AB5EA92CE772E4001F4D83 /* View */ = {
+		28AB5EA92CE772E4001F4D83 /* ContentView */ = {
 			isa = PBXGroup;
 			children = (
 				28A1EEBC2CE5AA3B00D8F1C6 /* ContentView.swift */,
-				28AB5EAA2CEB0E32001F4D83 /* VoiceMemoFolderView.swift */,
 				28AB5EAC2CF5B372001F4D83 /* SeekBarView.swift */,
 				28AB5EAE2CF5E0CE001F4D83 /* RecodingButtonView.swift */,
 				28A157F72D13A31A006EF321 /* EditBottomView.swift */,
 				28B04C1B2CF9A15D004E6115 /* DeletedFolderView.swift */,
 				28B04C1F2CF9B26F004E6115 /* OftenUsedFolderView.swift */,
 				28B09C132D1985E80007ED16 /* EditMemoRowView.swift */,
+				2834E5E92D1F78B40034B87A /* SelectFolderView.swift */,
 			);
-			path = View;
+			path = ContentView;
 			sourceTree = "<group>";
 		};
 		28E0BB522CFD8A27000E910C /* DataServises */ = {
@@ -208,6 +227,7 @@
 				28E0BB7F2CFE99B1000E910C /* VoiceMemoModel.swift in Sources */,
 				28A157F82D13A31A006EF321 /* EditBottomView.swift in Sources */,
 				28A1EEBB2CE5AA3B00D8F1C6 /* VoiceMemoAppApp.swift in Sources */,
+				2834E5EA2D1F78B40034B87A /* SelectFolderView.swift in Sources */,
 				28E0BB7C2CFDC32A000E910C /* VoiceMemoEntities+CoreDataProperties.swift in Sources */,
 				28AB5EAB2CEB0E32001F4D83 /* VoiceMemoFolderView.swift in Sources */,
 				28B04C202CF9B26F004E6115 /* OftenUsedFolderView.swift in Sources */,
