@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct AddFolderView: View {
-    @Binding var textFieldText: String 
+    @Environment(\.managedObjectContext) private var viewContext
+    @Binding var textFieldText: String
     @Binding var isAddFolder: Bool
     var body: some View {
         ZStack {
@@ -58,11 +59,22 @@ struct AddFolderView: View {
                         .foregroundColor(Color("DataCount"))
                         .offset(x:28,y: -5)
                         .onTapGesture {
+                            saveFolder()
                             isAddFolder = false // 保存して閉じる
                         }
                 }
             }
         }
     }
+    private func saveFolder() {
+        let newFolder = FolderEntities(context: viewContext)
+        newFolder.id = UUID()
+        newFolder.title = textFieldText
+        newFolder.numberOfData = 0 // デフォルト値を設定
+        do {
+            try viewContext.save() // Core Data に保存
+        } catch {
+            print("Error saving folder: \(error.localizedDescription)")
+        }
+    }
 }
-
