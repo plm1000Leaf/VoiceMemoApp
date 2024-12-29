@@ -15,6 +15,7 @@ struct VoiceMemoModel {
         newVoiceMemo.duration = duration
         newVoiceMemo.createdAt = Date()
         newVoiceMemo.location = location
+        newVoiceMemo.isDelete = false
         
         do {
             try context.save()

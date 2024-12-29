@@ -12,7 +12,7 @@ extension VoiceMemoEntities {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<VoiceMemoEntities> {
         return NSFetchRequest<VoiceMemoEntities>(entityName: "VoiceMemoEntities")
     }
-
+    @NSManaged public var isDelete: Bool
     @NSManaged public var id: UUID?
     @NSManaged public var title: String?
     @NSManaged public var filePath: String?

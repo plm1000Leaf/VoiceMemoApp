@@ -81,6 +81,7 @@
 				2834E5ED2D1F86460034B87A /* AddFolderView.swift */,
 				28AB5EAA2CEB0E32001F4D83 /* VoiceMemoFolderView.swift */,
 				2834E5F52D2107860034B87A /* EditFolderRowView.swift */,
+				2834E5E92D1F78B40034B87A /* SelectFolderView.swift */,
 			);
 			path = VoiceMemoFolderView;
 			sourceTree = "<group>";
@@ -133,7 +134,6 @@
 				28B04C1B2CF9A15D004E6115 /* DeletedFolderView.swift */,
 				28B04C1F2CF9B26F004E6115 /* OftenUsedFolderView.swift */,
 				28B09C132D1985E80007ED16 /* EditMemoRowView.swift */,
-				2834E5E92D1F78B40034B87A /* SelectFolderView.swift */,
 			);
 			path = ContentView;
 			sourceTree = "<group>";
