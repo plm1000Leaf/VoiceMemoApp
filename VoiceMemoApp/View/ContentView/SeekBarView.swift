@@ -76,7 +76,11 @@ struct SeekBarView: View {
                 .foregroundColor(.black)
                 
                 Button(action: {
-                    moveToDeletedFolder()
+                    if voiceMemo.isDelete {
+                        vmM.seekBarDeleteVoiceMemo(voiceMemo, context: context) // 完全削除
+                    } else {
+                        moveToDeletedFolder() // 削除フォルダへ移動
+                    }
                 }) {
                     Image(systemName: "trash")
                         .foregroundColor(.blue)

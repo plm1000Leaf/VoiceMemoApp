@@ -38,7 +38,9 @@ struct DeletedFolderView: View {
                             proxy.scrollTo(0, anchor: .top)
                         }
                     if isEditing {
-                        EditBottomView(selectedMemos: $selectedMemos,deleteAction: editModeDeleteMemos)
+                        EditDeleteBottomView(
+                            selectedMemos: $selectedMemos,
+                            deleteAction: editModeDeleteMemos)
                     }
                 }
             }

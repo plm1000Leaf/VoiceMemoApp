@@ -9,12 +9,14 @@ import SwiftUI
 import CoreData
 
 struct EditBottomView: View {
+    
+    @Binding var selectedMemos: Set<NSManagedObjectID>
     @Environment(\.managedObjectContext) private var context
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \VoiceMemoEntities.createdAt, ascending: false)],
+        predicate: NSPredicate(format: "isDelete == NO"), // 非削除データのみ取得
         animation: .default
     ) private var voiceMemos: FetchedResults<VoiceMemoEntities>
-    @Binding var selectedMemos: Set<NSManagedObjectID>
     @State private var isSelectFolderViewPresented = false
     
     var deleteAction: () -> Void
@@ -52,7 +54,7 @@ struct EditBottomView: View {
         }
     }
     
-     func moveSelectedMemosToDeletedFolder() {
+    private func moveSelectedMemosToDeletedFolder() {
         selectedMemos.forEach { objectID in
             if let memo = voiceMemos.first(where: { $0.objectID == objectID }) {
                 memo.isDelete = true // 削除フラグを立てる

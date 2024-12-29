@@ -58,7 +58,9 @@ struct VoiceMemoModel {
             print("削除済みフォルダへの移動中にエラーが発生しました: \(error)")
         }
     }
+    
+    }
 
     
-}
+
 
