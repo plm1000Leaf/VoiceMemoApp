@@ -76,7 +76,7 @@ struct SeekBarView: View {
                 .foregroundColor(.black)
                 
                 Button(action: {
-                    vmM.seekBarDeleteVoiceMemo(voiceMemo, context: context)
+                    moveToDeletedFolder()
                 }) {
                     Image(systemName: "trash")
                         .foregroundColor(.blue)
@@ -116,5 +116,11 @@ struct SeekBarView: View {
         let seconds = Int(time) % 60
         return String(format: "%02d:%02d", minutes, seconds)
     }
+    
+    private func moveToDeletedFolder() {
+        VoiceMemoModel.moveToDeletedFolder(voiceMemo, context: context)
+    }
+
+    
 }
 

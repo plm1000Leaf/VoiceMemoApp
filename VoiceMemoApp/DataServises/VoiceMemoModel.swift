@@ -46,7 +46,19 @@ struct VoiceMemoModel {
         } catch {
             print("VoiceMemo削除中にエラーが発生しました: \(error)")
         }
+        
     }
+    
+    static func moveToDeletedFolder(_ voiceMemo: VoiceMemoEntities, context: NSManagedObjectContext) {
+        voiceMemo.isDelete = true // 削除済みとしてマーク
+        do {
+            try context.save()
+            print("VoiceMemoを削除済みフォルダに移動しました: \(voiceMemo.title ?? "No Title")")
+        } catch {
+            print("削除済みフォルダへの移動中にエラーが発生しました: \(error)")
+        }
+    }
+
     
 }
 

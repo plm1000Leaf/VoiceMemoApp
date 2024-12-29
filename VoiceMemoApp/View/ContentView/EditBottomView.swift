@@ -52,7 +52,7 @@ struct EditBottomView: View {
         }
     }
     
-    private func moveSelectedMemosToDeletedFolder() {
+     func moveSelectedMemosToDeletedFolder() {
         selectedMemos.forEach { objectID in
             if let memo = voiceMemos.first(where: { $0.objectID == objectID }) {
                 memo.isDelete = true // 削除フラグを立てる
