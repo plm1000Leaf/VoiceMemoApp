@@ -130,6 +130,9 @@ extension VoiceMemoFolderView {
                 }
                 VStack{
                     let n = ["すべての録音","よく使う項目","最近削除した項目"]
+                    let favCount = voiceMemos.filter { !$0.isDelete && $0.isFav }.count
+                    let deleteCount = voiceMemos.filter { $0.isDelete && !$0.isFav }.count
+
                     ForEach(0..<3){ index in
                         NavigationLink(
                             destination: destinationView(for: index)
@@ -139,8 +142,23 @@ extension VoiceMemoFolderView {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(.leading, -50)
                                     .foregroundColor(.black)
-                                Text("\(voiceMemos.count)")
-                                    .foregroundColor(Color("DataCount"))
+                                
+                                switch index {
+                                case 0:
+                                    Text("\(voiceMemos.count)")
+                                        .foregroundColor(Color("DataCount"))
+                                case 1:
+                                    Text("\(favCount)")
+                                        .foregroundColor(Color("DataCount"))
+                                case 2:
+                                    Text("\(deleteCount)")
+                                        .foregroundColor(Color("DataCount"))
+                                    
+                                default:
+                                    Text("N/A")
+                                        .foregroundColor(Color.gray)
+                                }
+                                    
                                 Image(systemName: "chevron.right")
                                     .foregroundColor(Color("ListLine"))
                                     .bold()

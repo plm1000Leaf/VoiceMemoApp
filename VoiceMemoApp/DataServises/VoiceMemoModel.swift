@@ -66,6 +66,7 @@ struct VoiceMemoModel {
     static func moveSelectedMemosToDeletedFolder(selectedMemos:Set<NSManagedObjectID>,voiceMemos: FetchedResults<VoiceMemoEntities>,context: NSManagedObjectContext) {
         selectedMemos.forEach { objectID in
             if let memo = voiceMemos.first(where: { $0.objectID == objectID }) {
+                memo.isFav = false
                 memo.isDelete = true // 削除フラグを立てる
             }
         }
@@ -79,7 +80,7 @@ struct VoiceMemoModel {
     static func moveSelectedMemosToFavFolder(selectedMemos:Set<NSManagedObjectID>,voiceMemos: FetchedResults<VoiceMemoEntities>,context: NSManagedObjectContext) {
         selectedMemos.forEach { objectID in
             if let memo = voiceMemos.first(where: { $0.objectID == objectID }) {
-                memo.isFav = true // 削除フラグを立てる
+                memo.isFav = true
             }
         }
         do {
