@@ -83,7 +83,6 @@
 				2834E5ED2D1F86460034B87A /* AddFolderView.swift */,
 				28AB5EAA2CEB0E32001F4D83 /* VoiceMemoFolderView.swift */,
 				2834E5F52D2107860034B87A /* EditFolderRowView.swift */,
-				2834E5E92D1F78B40034B87A /* SelectFolderView.swift */,
 			);
 			path = VoiceMemoFolderView;
 			sourceTree = "<group>";
@@ -129,13 +128,14 @@
 		28AB5EA92CE772E4001F4D83 /* ContentView */ = {
 			isa = PBXGroup;
 			children = (
+				2834E5E92D1F78B40034B87A /* SelectFolderView.swift */,
 				28A1EEBC2CE5AA3B00D8F1C6 /* ContentView.swift */,
 				28AB5EAC2CF5B372001F4D83 /* SeekBarView.swift */,
 				28AB5EAE2CF5E0CE001F4D83 /* RecodingButtonView.swift */,
-				28A157F72D13A31A006EF321 /* EditBottomView.swift */,
 				28B04C1B2CF9A15D004E6115 /* DeletedFolderView.swift */,
 				28B04C1F2CF9B26F004E6115 /* OftenUsedFolderView.swift */,
 				28B09C132D1985E80007ED16 /* EditMemoRowView.swift */,
+				28A157F72D13A31A006EF321 /* EditBottomView.swift */,
 				2834E5F72D213F350034B87A /* EditDeleteBottomView.swift */,
 			);
 			path = ContentView;

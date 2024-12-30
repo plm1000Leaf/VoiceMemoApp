@@ -10,10 +10,13 @@ import CoreData
 struct OftenUsedFolderView: View {
 
     @Environment(\.managedObjectContext) private var context
+
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \VoiceMemoEntities.createdAt, ascending: false)],
+        predicate: NSPredicate(format: "isDelete == NO AND isFav == YES"),
         animation: .default
     ) private var voiceMemos: FetchedResults<VoiceMemoEntities>
+    
     @State private var textFieldText: String = ""
     @State private var expandedIndex: Int? = nil
     @State private var isEditing: Bool = false
@@ -35,12 +38,14 @@ struct OftenUsedFolderView: View {
                         .onAppear {
                             proxy.scrollTo(0, anchor: .top)
                         }
+                    
                     if isEditing {
                         EditBottomView(selectedMemos: $selectedMemos,deleteAction: editModeDeleteMemos)
                     } else {
                         RecodingButtonView(context: context, addVoiceMemoWithLocation: addVoiceMemoWithLocation)
 
                     }
+
                 }
             }
         }

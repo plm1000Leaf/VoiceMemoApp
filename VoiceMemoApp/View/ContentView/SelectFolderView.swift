@@ -1,7 +1,10 @@
 import SwiftUI
+import CoreData
 
 struct SelectFolderView: View {
+    @Environment(\.managedObjectContext) private var context
     @Binding var isPresented: Bool
+    @Binding var selectedMemos: Set<NSManagedObjectID>
     @State private var textFieldText: String = ""
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \VoiceMemoEntities.createdAt, ascending: false)],
@@ -83,6 +86,7 @@ struct SelectFolderView: View {
                         ForEach(0..<3){ index in
 
                                 HStack{
+                                    
                                     Text("\(n[index])")
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .padding(.leading, -50)
@@ -92,6 +96,34 @@ struct SelectFolderView: View {
                                     Image(systemName: "chevron.right")
                                         .foregroundColor(Color("ListLine"))
                                         .bold()
+                                }
+                                .contentShape(Rectangle()) // タップ領域を広げる
+                                .onTapGesture {
+                                    switch index {
+                                    case 0:
+                                        print("Number is 0")
+                                        fallthrough
+                                    case 1:
+                                        
+                                        VoiceMemoModel.moveSelectedMemosToFavFolder(
+                                            selectedMemos: selectedMemos,
+                                            voiceMemos: voiceMemos,
+                                            context: context
+                                        )
+                                        
+                                        isPresented = false
+                                        
+                                    case 2:
+                                        VoiceMemoModel.moveSelectedMemosToDeletedFolder(
+                                            selectedMemos: selectedMemos,
+                                            voiceMemos: voiceMemos,
+                                            context: context
+                                        )
+                                        
+                                        isPresented = false
+                                    default:
+                                        print("Default case")
+                                    }
                                 }
                         
                             if index <= 1 {

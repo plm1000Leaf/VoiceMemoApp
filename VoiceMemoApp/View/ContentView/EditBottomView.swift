@@ -38,7 +38,7 @@ struct EditBottomView: View {
                         .font(.system(size: 25))
                         .foregroundColor(selectedMemos.isEmpty ? Color("RecordingSFSymbleColor") : Color.blue)
                 }.sheet(isPresented: $isSelectFolderViewPresented) {
-                    SelectFolderView(isPresented: $isSelectFolderViewPresented)
+                    SelectFolderView(isPresented: $isSelectFolderViewPresented, selectedMemos: $selectedMemos)
                 }
                 Spacer()
                 Button(action: moveSelectedMemosToDeletedFolder) {
@@ -55,16 +55,12 @@ struct EditBottomView: View {
     }
     
     private func moveSelectedMemosToDeletedFolder() {
-        selectedMemos.forEach { objectID in
-            if let memo = voiceMemos.first(where: { $0.objectID == objectID }) {
-                memo.isDelete = true // 削除フラグを立てる
-            }
-        }
-        do {
-            try context.save()
-            selectedMemos.removeAll() // 選択をクリア
-        } catch {
-            print("削除済みフォルダへの移動中にエラー: \(error)")
-        }
+        VoiceMemoModel.moveSelectedMemosToDeletedFolder(
+            selectedMemos: selectedMemos,
+            voiceMemos: voiceMemos,
+            context: context
+        )
+        selectedMemos.removeAll() // 選択をクリア
     }
+
 }

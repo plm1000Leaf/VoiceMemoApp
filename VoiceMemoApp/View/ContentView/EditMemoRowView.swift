@@ -22,7 +22,7 @@ struct  EditMemoRowView: View {
                     .frame(maxHeight: .infinity, alignment: .trailing)
                     .foregroundColor(Color("RecordingMemoLine"))
                     .padding(.top, 15)
-                Text(memo.location ?? "不明な場所")
+                Text(memo.title ?? "不明な場所")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .bold()
                     .font(.system(size: 20))

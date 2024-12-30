@@ -6,6 +6,7 @@
 //
 import Foundation
 import CoreData
+import SwiftUI
 
 struct VoiceMemoModel {
 
@@ -16,6 +17,7 @@ struct VoiceMemoModel {
         newVoiceMemo.createdAt = Date()
         newVoiceMemo.location = location
         newVoiceMemo.isDelete = false
+        newVoiceMemo.isFav = false
         
         do {
             try context.save()
@@ -57,8 +59,35 @@ struct VoiceMemoModel {
         } catch {
             print("削除済みフォルダへの移動中にエラーが発生しました: \(error)")
         }
+        
+        
     }
     
+    static func moveSelectedMemosToDeletedFolder(selectedMemos:Set<NSManagedObjectID>,voiceMemos: FetchedResults<VoiceMemoEntities>,context: NSManagedObjectContext) {
+        selectedMemos.forEach { objectID in
+            if let memo = voiceMemos.first(where: { $0.objectID == objectID }) {
+                memo.isDelete = true // 削除フラグを立てる
+            }
+        }
+        do {
+            try context.save()
+        } catch {
+            print("削除済みフォルダへの移動中にエラー: \(error)")
+        }
+    }
+    
+    static func moveSelectedMemosToFavFolder(selectedMemos:Set<NSManagedObjectID>,voiceMemos: FetchedResults<VoiceMemoEntities>,context: NSManagedObjectContext) {
+        selectedMemos.forEach { objectID in
+            if let memo = voiceMemos.first(where: { $0.objectID == objectID }) {
+                memo.isFav = true // 削除フラグを立てる
+            }
+        }
+        do {
+            try context.save()
+        } catch {
+            print("削除済みフォルダへの移動中にエラー: \(error)")
+        }
+    }
     }
 
     
