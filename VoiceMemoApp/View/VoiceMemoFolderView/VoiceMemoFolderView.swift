@@ -11,6 +11,7 @@ struct VoiceMemoFolderView: View {
     @State private var textFieldText: String = ""
     @State private var isAddFolder: Bool = false
     @State private var isEditingFolder: Bool = false
+    @State private var selectedFolderID: UUID?
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \VoiceMemoEntities.createdAt, ascending: false)],
         animation: .default
@@ -44,7 +45,8 @@ struct VoiceMemoFolderView: View {
             }
             if isAddFolder {
                 AddFolderView(
-                    textFieldText: $textFieldText, 
+                    selectedFolderID: $selectedFolderID, 
+                    textFieldText: $textFieldText,
                     isAddFolder: $isAddFolder
                 )
                      .onTapGesture {
@@ -195,24 +197,26 @@ extension VoiceMemoFolderView {
                         .foregroundColor(.white)
                     VStack{
                         ForEach(folders, id: \.id) { folder in
-                            HStack {
-                                Image(systemName: "folder")
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.leading, 40)
-                                    .font(.system(size: 30))
-                                    .foregroundColor(.blue)
-                                Text(folder.title)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.leading, -80)
-                                    .foregroundColor(.black)
-                                Text("3")
-                                    .foregroundColor(Color("DataCount"))
-                                    .offset(x:-50)
-                                
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(Color("ListLine"))
-                                    .offset(x:-45)
-                                    .bold()
+                            NavigationLink(destination: FolderDetailView(folderTitle: folder.title)){
+                                HStack {
+                                    Image(systemName: "folder")
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .padding(.leading, 40)
+                                        .font(.system(size: 30))
+                                        .foregroundColor(.blue)
+                                    Text(folder.title)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .padding(.leading, -80)
+                                        .foregroundColor(.black)
+                                    Text("3")
+                                        .foregroundColor(Color("DataCount"))
+                                        .offset(x:-50)
+                                    
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(Color("ListLine"))
+                                        .offset(x:-45)
+                                        .bold()
+                                }
                             }
                             Divider()
                                 .foregroundColor(Color("ListLine"))

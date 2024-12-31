@@ -1,22 +1,23 @@
 //
-//  ContentView.swift
+//  FolderDetailView.swift
 //  VoiceMemoApp
 //
+//  Created by 千葉陽乃 on 2024/12/31.
 //
+
 
 import SwiftUI
 import CoreData
 
-struct ContentView: View {
-    var folderID: UUID? // フォルダのID
-    var folderTitle: String = "すべての録音" // デフォルト値を設定
-    
+struct FolderDetailView: View {
+
     @Environment(\.managedObjectContext) private var context
+
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \VoiceMemoEntities.createdAt, ascending: false)],
-        predicate: NSPredicate(format: "isDelete == NO AND isFav == NO"),
         animation: .default
     ) private var voiceMemos: FetchedResults<VoiceMemoEntities>
+    
     @State private var textFieldText: String = ""
     @State private var expandedIndex: Int? = nil
     @State private var isEditing: Bool = false
@@ -26,8 +27,9 @@ struct ContentView: View {
     @State private var selectedMemos: Set<NSManagedObjectID> = []
     @StateObject private var locationManager = LocationManager()
     
+    var folderTitle: String
+    
     var body: some View {
-        NavigationStack{
             VStack {
                 
                 headerArea
@@ -38,28 +40,27 @@ struct ContentView: View {
                         .onAppear {
                             proxy.scrollTo(0, anchor: .top)
                         }
+                    
                     if isEditing {
                         EditBottomView(selectedMemos: $selectedMemos,deleteAction: editModeDeleteMemos)
                     } else {
                         RecodingButtonView(context: context, addVoiceMemoWithLocation: addVoiceMemoWithLocation)
 
                     }
+
                 }
             }
+            .navigationTitle(folderTitle)
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
-}
 
    
 
-#Preview {
-    ContentView()
-}
 
 
 
-
-extension ContentView {
+extension FolderDetailView {
     
     private var headerArea: some View {
         HStack{
@@ -96,7 +97,7 @@ extension ContentView {
                 .font(.system(size: 100))
             
         } else {
-            Text("すべての録音")
+            Text(folderTitle)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.largeTitle)
                 .padding(.leading, 20)
@@ -261,4 +262,5 @@ extension ContentView {
         }
     }
 }
+
 

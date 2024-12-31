@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddFolderView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @Binding var selectedFolderID: UUID?
     @Binding var textFieldText: String
     @Binding var isAddFolder: Bool
     var body: some View {
@@ -68,11 +69,13 @@ struct AddFolderView: View {
     }
     private func saveFolder() {
         let newFolder = FolderEntities(context: viewContext)
-        newFolder.id = UUID()
+       let newID = UUID()
+        newFolder.id = newID
         newFolder.title = textFieldText
         newFolder.numberOfData = 0 // デフォルト値を設定
         do {
             try viewContext.save() // Core Data に保存
+            selectedFolderID = newID 
         } catch {
             print("Error saving folder: \(error.localizedDescription)")
         }
