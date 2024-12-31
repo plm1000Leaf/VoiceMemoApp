@@ -174,7 +174,6 @@ struct SelectFolderView: View {
                             .foregroundColor(.white)
                         VStack{
                             ForEach(folders, id: \.id) { folder in
-                                NavigationLink(destination: FolderDetailView(folderTitle: folder.title)){
                                     HStack {
                                         Image(systemName: "folder")
                                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -194,7 +193,6 @@ struct SelectFolderView: View {
                                             .offset(x:-45)
                                             .bold()
                                     }
-                                }
                                 Divider()
                                     .foregroundColor(Color("ListLine"))
                                     .frame(width: 270, height: 20)
