@@ -193,6 +193,11 @@ struct SelectFolderView: View {
                                             .offset(x:-45)
                                             .bold()
                                     }
+                                    .onTapGesture {
+                                        VoiceMemoModel.moveSelectedMemosToFolder(selectedFolder: folder, selectedMemos: selectedMemos, context: context, voiceMemos: voiceMemos
+                                        )
+                                    isPresented = false // モーダルを閉じる
+                                }
                                 Divider()
                                     .foregroundColor(Color("ListLine"))
                                     .frame(width: 270, height: 20)

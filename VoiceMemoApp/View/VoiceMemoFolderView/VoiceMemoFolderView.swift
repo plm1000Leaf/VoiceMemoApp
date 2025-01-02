@@ -197,7 +197,7 @@ extension VoiceMemoFolderView {
                         .foregroundColor(.white)
                     VStack{
                         ForEach(folders, id: \.id) { folder in
-                            NavigationLink(destination: FolderDetailView(folderTitle: folder.title)){
+                            NavigationLink(destination: FolderDetailView(folderID: folder.id, folderTitle: folder.title)){
                                 HStack {
                                     Image(systemName: "folder")
                                         .frame(maxWidth: .infinity, alignment: .leading)

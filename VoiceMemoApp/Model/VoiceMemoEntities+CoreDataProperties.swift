@@ -20,5 +20,7 @@ extension VoiceMemoEntities {
     @NSManaged public var createdAt: Date?
     @NSManaged public var duration: Double
     @NSManaged public var location: String?
+    @NSManaged public var folderID: UUID?
+
 }
 

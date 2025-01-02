@@ -88,6 +88,19 @@ struct VoiceMemoModel {
         } catch {
             print("削除済みフォルダへの移動中にエラー: \(error)")
         }
+    } 
+    static func moveSelectedMemosToFolder(selectedFolder: FolderEntities, selectedMemos: Set<NSManagedObjectID>, context: NSManagedObjectContext,voiceMemos: FetchedResults<VoiceMemoEntities>) {
+        selectedMemos.forEach { objectID in
+            if let memo = context.object(with: objectID) as? VoiceMemoEntities {
+                memo.folderID = selectedFolder.id // フォルダIDを更新
+            }
+        }
+        do {
+            try context.save()
+            print("メモがフォルダ \(selectedFolder.title) に移動しました")
+        } catch {
+            print("フォルダへの移動中にエラー: \(error)")
+        }
     }
     }
 

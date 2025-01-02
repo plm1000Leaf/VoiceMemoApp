@@ -147,7 +147,6 @@
 		28E0BB522CFD8A27000E910C /* DataServises */ = {
 			isa = PBXGroup;
 			children = (
-				2834E5F32D20CFDC0034B87A /* FolderEntities.swift */,
 				28E0BB7E2CFE99B1000E910C /* VoiceMemoModel.swift */,
 				28E0BB772CFDAB20000E910C /* AppDelegate.swift */,
 				28E0BB562CFD8CD2000E910C /* Model.xcdatamodeld */,
@@ -158,6 +157,7 @@
 		28E0BB7D2CFDC35C000E910C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2834E5F32D20CFDC0034B87A /* FolderEntities.swift */,
 				28E0BB792CFDC306000E910C /* VoiceMemoEntities.swift */,
 				28E0BB7B2CFDC32A000E910C /* VoiceMemoEntities+CoreDataProperties.swift */,
 			);

@@ -14,7 +14,7 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var context
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \VoiceMemoEntities.createdAt, ascending: false)],
-        predicate: NSPredicate(format: "isDelete == NO AND isFav == NO"),
+        predicate: NSPredicate(format: "isDelete == NO AND isFav == NO AND folderID == nil" ),
         animation: .default
     ) private var voiceMemos: FetchedResults<VoiceMemoEntities>
     @State private var textFieldText: String = ""

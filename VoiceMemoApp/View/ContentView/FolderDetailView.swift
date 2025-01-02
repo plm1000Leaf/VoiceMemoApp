@@ -10,14 +10,13 @@ import SwiftUI
 import CoreData
 
 struct FolderDetailView: View {
-
-    @Environment(\.managedObjectContext) private var context
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \VoiceMemoEntities.createdAt, ascending: false)],
-        animation: .default
-    ) private var voiceMemos: FetchedResults<VoiceMemoEntities>
+    var folderID: UUID
+    var folderTitle: String
     
+    @Environment(\.managedObjectContext) private var context
+    @State private var voiceMemos: [VoiceMemoEntities] = []
+
+
     @State private var textFieldText: String = ""
     @State private var expandedIndex: Int? = nil
     @State private var isEditing: Bool = false
@@ -27,7 +26,6 @@ struct FolderDetailView: View {
     @State private var selectedMemos: Set<NSManagedObjectID> = []
     @StateObject private var locationManager = LocationManager()
     
-    var folderTitle: String
     
     var body: some View {
             VStack {
@@ -50,6 +48,7 @@ struct FolderDetailView: View {
 
                 }
             }
+            .onAppear(perform: fetchVoiceMemos)
             .navigationTitle(folderTitle)
             .navigationBarTitleDisplayMode(.inline)
         }
@@ -261,6 +260,19 @@ extension FolderDetailView {
             print("削除中にエラーが発生しました: \(error)")
         }
     }
+    
+    private func fetchVoiceMemos() {
+        let request: NSFetchRequest<VoiceMemoEntities> = VoiceMemoEntities.fetchRequest()
+        request.predicate = NSPredicate(format: "folderID == %@", folderID as CVarArg)
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \VoiceMemoEntities.createdAt, ascending: false)]
+
+        do {
+            voiceMemos = try context.fetch(request) // データをフェッチ
+        } catch {
+            print("Error fetching voice memos: \(error)")
+        }
+    }
+
 }
 
 
