@@ -57,7 +57,8 @@ struct AddFolderView: View {
                         .offset(x:-17, y: -7)
                     Text("保存")
                         .bold()
-                        .foregroundColor(Color("DataCount"))
+                        .foregroundColor(textFieldText.isEmpty ? Color("DataCount") : Color.blue)
+//                        .foregroundColor(Color("DataCount"))
                         .offset(x:28,y: -5)
                         .onTapGesture {
                             saveFolder()

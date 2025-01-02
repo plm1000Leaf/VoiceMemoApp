@@ -263,7 +263,7 @@ extension FolderDetailView {
     
     private func fetchVoiceMemos() {
         let request: NSFetchRequest<VoiceMemoEntities> = VoiceMemoEntities.fetchRequest()
-        request.predicate = NSPredicate(format: "folderID == %@", folderID as CVarArg)
+        request.predicate = NSPredicate(format: "folderID == %@ AND isDelete == NO", folderID as CVarArg)
         request.sortDescriptors = [NSSortDescriptor(keyPath: \VoiceMemoEntities.createdAt, ascending: false)]
 
         do {
