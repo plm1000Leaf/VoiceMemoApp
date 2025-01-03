@@ -95,6 +95,10 @@ struct VoiceMemoModel {
                 memo.folderID = selectedFolder.id // フォルダIDを更新
             }
         }
+        
+        let folderMemosCount = voiceMemos.filter { $0.folderID == selectedFolder.id }.count
+        selectedFolder.numberOfData = Int32(folderMemosCount)
+        
         do {
             try context.save()
             print("メモがフォルダ \(selectedFolder.title) に移動しました")
