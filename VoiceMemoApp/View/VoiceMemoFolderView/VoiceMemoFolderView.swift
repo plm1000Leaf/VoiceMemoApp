@@ -132,6 +132,9 @@ extension VoiceMemoFolderView {
                 }
                 VStack{
                     let n = ["すべての録音","よく使う項目","最近削除した項目"]
+                    let allMemosCount = voiceMemos.filter {
+                        !$0.isDelete && !$0.isFav && $0.folderID == nil
+                    }.count
                     let favCount = voiceMemos.filter { !$0.isDelete && $0.isFav }.count
                     let deleteCount = voiceMemos.filter { $0.isDelete && !$0.isFav }.count
 
@@ -147,7 +150,7 @@ extension VoiceMemoFolderView {
                                 
                                 switch index {
                                 case 0:
-                                    Text("\(voiceMemos.count)")
+                                    Text("\(allMemosCount)")
                                         .foregroundColor(Color("DataCount"))
                                 case 1:
                                     Text("\(favCount)")
