@@ -19,6 +19,9 @@ struct RecodingButtonView: View {
     @State private var isRecording: Bool = false
     @StateObject private var locationManager = LocationManager()
     
+    @State private var recordingDuration: Double = 0
+    @State private var timer: Timer? = nil
+    
     var body: some View {
         VStack(spacing: 0){
             if showTab {
@@ -30,14 +33,13 @@ struct RecodingButtonView: View {
                 buttonBackArea
                 
                 Button(action: {
-                    withAnimation {
-                        if isRecording{
-                            vmM.addVoiceMemo(title: "初期", duration: 120, context: context)
-                            
-                        }
-                        isRecording.toggle()
-                        showTab.toggle()
+                    if isRecording {
+                        stopRecording()
+                    } else {
+                        startRecording()
                     }
+                    isRecording.toggle()
+                    showTab.toggle()
                 })
                 {
                     buttonArea
@@ -60,7 +62,10 @@ extension RecodingButtonView {
             
             VStack{
                 Text("東京都")
-                Text("00:00:00")
+                    .bold()
+                    .font(.system(size: 20))
+                Spacer().frame(height: 30)
+                Text(formatTime(from: recordingDuration))
                 Spacer().frame(height: 50)
                 Rectangle()
                     .frame(width: 400, height:1)
@@ -96,6 +101,31 @@ extension RecodingButtonView {
                 .frame(width: 400, height: 130)
                 .foregroundColor(Color("RecordingBottomColor"))
         }
+    
+    // 録音を開始する
+    private func startRecording() {
+        recordingDuration = 0 // 時間をリセット
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            recordingDuration += 1
+        }
+    }
+
+    // 録音を終了する
+    private func stopRecording() {
+        timer?.invalidate() // タイマーを停止
+        timer = nil
+        
+        // 録音データを保存
+        vmM.addVoiceMemo(title: "初期", duration: recordingDuration, context: context)
+    }
+    
+    // 時間をフォーマットする
+    private func formatTime(from duration: Double) -> String {
+        let hours = Int(duration) / 3600
+        let minutes = (Int(duration) % 3600) / 60
+        let seconds = Int(duration) % 60
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
 
 
     }
