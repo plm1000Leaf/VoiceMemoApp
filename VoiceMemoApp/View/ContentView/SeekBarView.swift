@@ -15,13 +15,13 @@ struct SeekBarView: View {
     let voiceMemo: VoiceMemoEntities
     typealias vmM = VoiceMemoModel
     
-    let totalTime: Double = 100
+//    let totalTime: Double = 100
     let stepTime: Double = 15
     let stepInterval: TimeInterval = 1.0
     
     var body: some View {
         VStack {
-            Slider(value: $currentTime, in: 0...totalTime, step: 1) {
+            Slider(value: $currentTime, in: 0...voiceMemo.duration, step: 1) {
                 Text("Seek Bar")
             }
             .padding()
@@ -30,7 +30,7 @@ struct SeekBarView: View {
             HStack {
                 Text(formatTime(currentTime)) // 現在の時間
                 Spacer()
-                Text(formatTime(totalTime))  // 全体の時間
+                Text(formatTime(voiceMemo.duration))  // 全体の時間
             }
             .foregroundColor(.gray)
             .padding(.horizontal)
@@ -66,7 +66,7 @@ struct SeekBarView: View {
                     
                     Button(action: {
                         // 現在の時間を15秒戻す
-                        currentTime = min(currentTime +  stepTime, totalTime)
+                        currentTime = min(currentTime +  stepTime, voiceMemo.duration)
                     }){
                         Image(systemName: "goforward.15")
                             .padding(.horizontal, 13)
@@ -98,7 +98,7 @@ struct SeekBarView: View {
     private func startTimer() {
         stopTimer() // 既存のタイマーを停止して新しいタイマーを作成
         timer = Timer.scheduledTimer(withTimeInterval: stepInterval, repeats: true) { _ in
-            if currentTime < totalTime {
+            if currentTime < voiceMemo.duration {
                 currentTime += 1
             } else {
                 stopTimer()
