@@ -5,17 +5,19 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct SeekBarView: View {
     @Environment(\.managedObjectContext) private var context
     @State private var currentTime: Double = 0
     @State private var isPlaying: Bool = false
     @State private var timer: Timer?
+    @State private var audioPlayer: AVAudioPlayer? = nil
     
     let voiceMemo: VoiceMemoEntities
     typealias vmM = VoiceMemoModel
     
-//    let totalTime: Double = 100
+
     let stepTime: Double = 15
     let stepInterval: TimeInterval = 1.0
     
@@ -54,12 +56,7 @@ struct SeekBarView: View {
                     }
                     
                     Button(action: {
-                        isPlaying.toggle()
-                    if isPlaying {
-                        startTimer()
-                    } else {
-                        stopTimer()
-                        }
+                        togglePlayback()
                     }) {
                         Image(systemName: isPlaying ? "pause.fill" : "play.fill")
                     }
@@ -94,7 +91,39 @@ struct SeekBarView: View {
     }
     
     
-    
+    private func togglePlayback() {
+        if isPlaying {
+            stopPlayback()
+        } else {
+            startPlayback()
+        }
+    }
+
+    private func startPlayback() {
+        guard let filePath = voiceMemo.filePath,
+              let fileURL = URL(string: filePath) else {
+            print("ファイルパスが無効です: \(voiceMemo.filePath ?? "nil")")
+            return
+        }
+
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: fileURL)
+            audioPlayer?.play()
+            isPlaying = true
+
+            // タイマーを開始してシークバーを更新
+            startTimer()
+        } catch {
+            print("再生エラー: \(error)")
+        }
+    }
+
+    private func stopPlayback() {
+        audioPlayer?.stop()
+        isPlaying = false
+        stopTimer()
+    }
+
     private func startTimer() {
         stopTimer() // 既存のタイマーを停止して新しいタイマーを作成
         timer = Timer.scheduledTimer(withTimeInterval: stepInterval, repeats: true) { _ in

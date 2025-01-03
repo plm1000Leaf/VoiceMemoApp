@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import AVFoundation
 
 
 struct RecodingButtonView: View {
@@ -21,6 +22,7 @@ struct RecodingButtonView: View {
     
     @State private var recordingDuration: Double = 0
     @State private var timer: Timer? = nil
+    @State private var audioRecorder: AVAudioRecorder? = nil
     
     var body: some View {
         VStack(spacing: 0){
@@ -61,14 +63,15 @@ extension RecodingButtonView {
                 .frame(maxWidth: .infinity, alignment: .bottom)
             
             VStack{
-                Text("東京都")
+                Text(locationManager.location ?? "位置情報を取得中...")
                     .bold()
                     .font(.system(size: 20))
                 Spacer().frame(height: 30)
                 Text(formatTime(from: recordingDuration))
                 Spacer().frame(height: 50)
-                Rectangle()
-                    .frame(width: 400, height:1)
+                Text("録音中....")
+                    .bold()
+                    .font(.system(size: 20))
                 
             }
             
@@ -104,20 +107,55 @@ extension RecodingButtonView {
     
     // 録音を開始する
     private func startRecording() {
-        recordingDuration = 0 // 時間をリセット
+        recordingDuration = 0
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             recordingDuration += 1
         }
+
+        let fileName = UUID().uuidString + ".m4a"
+        let filePath = getDocumentsDirectory().appendingPathComponent(fileName)
+        let settings = [
+            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+            AVSampleRateKey: 44100,
+            AVNumberOfChannelsKey: 2,
+            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+        ]
+
+        do {
+            audioRecorder = try AVAudioRecorder(url: filePath, settings: settings)
+            audioRecorder?.record()
+            print("録音開始")
+        } catch {
+            print("録音開始エラー: \(error)")
+        }
     }
+
 
     // 録音を終了する
     private func stopRecording() {
-        timer?.invalidate() // タイマーを停止
+        timer?.invalidate()
         timer = nil
-        
-        // 録音データを保存
-        vmM.addVoiceMemo(title: "初期", duration: recordingDuration, context: context)
+
+        audioRecorder?.stop()
+        let recordedFilePath = audioRecorder?.url.path
+        audioRecorder = nil
+
+        let currentLocation = locationManager.location ?? "不明な場所"
+        vmM.addVoiceMemo(
+            title: "初期",
+            duration: recordingDuration,
+            context: context,
+            location: currentLocation,
+            filePath: recordedFilePath
+        )
+        print("録音終了")
     }
+
+    // ドキュメントディレクトリのパスを取得
+    private func getDocumentsDirectory() -> URL {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    }
+
     
     // 時間をフォーマットする
     private func formatTime(from duration: Double) -> String {

@@ -10,12 +10,13 @@ import SwiftUI
 
 struct VoiceMemoModel {
 
-    static func addVoiceMemo(title: String, duration: Double, context: NSManagedObjectContext,location: String? = nil) {
+    static func addVoiceMemo(title: String, duration: Double, context: NSManagedObjectContext,location: String? = nil, filePath: String? = nil) {
         let newVoiceMemo = VoiceMemoEntities(context: context)
         newVoiceMemo.title = title
         newVoiceMemo.duration = duration
         newVoiceMemo.createdAt = Date()
         newVoiceMemo.location = location
+        newVoiceMemo.filePath = filePath
         newVoiceMemo.isDelete = false
         newVoiceMemo.isFav = false
         
