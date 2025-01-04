@@ -23,16 +23,15 @@ struct SeekBarView: View {
     
     var body: some View {
         VStack {
-            Slider(value: $currentTime, in: 0...voiceMemo.duration, step: 1) {
-                Text("Seek Bar")
-            }
-            .padding()
+//            Slider(value: $currentTime, in: 0...voiceMemo.duration, step: 1) {
+//                Text("Seek Bar")
+//            }
+//            .padding()
             
             // 時間を表示するテキスト
             HStack {
                 Text(formatTime(currentTime)) // 現在の時間
-                Spacer()
-                Text(formatTime(voiceMemo.duration))  // 全体の時間
+
             }
             .foregroundColor(.gray)
             .padding(.horizontal)
@@ -46,29 +45,13 @@ struct SeekBarView: View {
                 
                 HStack {
                     
-                    
-                    Button(action: {
-                        // 現在の時間を15秒戻す
-                        currentTime = max(currentTime - stepTime, 0)
-                    }){
-                        Image(systemName: "gobackward.15")
-                            .padding(.horizontal, 13)
-                    }
-                    
+                
                     Button(action: {
                         togglePlayback()
                     }) {
                         Image(systemName: isPlaying ? "pause.fill" : "play.fill")
                     }
-                    
-                    Button(action: {
-                        // 現在の時間を15秒戻す
-                        currentTime = min(currentTime +  stepTime, voiceMemo.duration)
-                    }){
-                        Image(systemName: "goforward.15")
-                            .padding(.horizontal, 13)
-                    }
-                    
+                                        
                 }
                 .foregroundColor(.black)
                 
