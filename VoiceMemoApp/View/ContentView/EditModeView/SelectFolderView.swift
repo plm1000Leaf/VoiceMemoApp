@@ -194,8 +194,10 @@ struct SelectFolderView: View {
                                             .bold()
                                     }
                                     .onTapGesture {
+                                        print("Selected folder: \(folder.title)")
                                         VoiceMemoModel.moveSelectedMemosToFolder(selectedFolder: folder, selectedMemos: selectedMemos, context: context, voiceMemos: voiceMemos
                                         )
+                                    selectedMemos.removeAll()
                                     isPresented = false // モーダルを閉じる
                                 }
                                 Divider()
