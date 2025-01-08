@@ -7,7 +7,7 @@
 import SwiftUI
 import AVFoundation
 
-struct SeekBarView: View {
+struct PlayFileView: View {
     @Environment(\.managedObjectContext) private var context
     @State private var currentTime: Double = 0
     @State private var isPlaying: Bool = false
@@ -23,14 +23,9 @@ struct SeekBarView: View {
     
     var body: some View {
         VStack {
-//            Slider(value: $currentTime, in: 0...voiceMemo.duration, step: 1) {
-//                Text("Seek Bar")
-//            }
-//            .padding()
-            
             // 時間を表示するテキスト
             HStack {
-                Text(formatTime(currentTime)) // 現在の時間
+                Text(VoiceMemoModel.formatListTime(from: currentTime)) // 現在の時間
 
             }
             .foregroundColor(.gray)
@@ -126,12 +121,6 @@ struct SeekBarView: View {
         timer = nil
     }
     
-    // 秒を「分:秒」の形式にフォーマットする関数
-    private func formatTime(_ time: Double) -> String {
-        let minutes = Int(time) / 60
-        let seconds = Int(time) % 60
-        return String(format: "%02d:%02d", minutes, seconds)
-    }
     
     private func moveToDeletedFolder() {
         VoiceMemoModel.moveToDeletedFolder(voiceMemo, context: context)

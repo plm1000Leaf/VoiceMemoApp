@@ -1,22 +1,22 @@
 //
-//  FolderDetailView.swift
+//  ContentView.swift
 //  VoiceMemoApp
 //
-//  Created by 千葉陽乃 on 2024/12/31.
 //
-
 
 import SwiftUI
 import CoreData
 
-struct FolderDetailView: View {
-    var folderID: UUID
-    var folderTitle: String
-    
+struct OftenUsedFolderView: View {
+
     @Environment(\.managedObjectContext) private var context
-    @State private var voiceMemos: [VoiceMemoEntities] = []
 
-
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \VoiceMemoEntities.createdAt, ascending: false)],
+        predicate: NSPredicate(format: "isDelete == NO AND isFav == YES"),
+        animation: .default
+    ) private var voiceMemos: FetchedResults<VoiceMemoEntities>
+    
     @State private var textFieldText: String = ""
     @State private var expandedIndex: Int? = nil
     @State private var isEditing: Bool = false
@@ -26,8 +26,8 @@ struct FolderDetailView: View {
     @State private var selectedMemos: Set<NSManagedObjectID> = []
     @StateObject private var locationManager = LocationManager()
     
-    
     var body: some View {
+        NavigationStack{
             VStack {
                 
                 headerArea
@@ -48,18 +48,15 @@ struct FolderDetailView: View {
 
                 }
             }
-            .onAppear(perform: fetchVoiceMemos)
-            .navigationTitle(folderTitle)
-            .navigationBarTitleDisplayMode(.inline)
         }
     }
+}
 
    
 
 
 
-
-extension FolderDetailView {
+extension OftenUsedFolderView {
     
     private var headerArea: some View {
         HStack{
@@ -96,7 +93,7 @@ extension FolderDetailView {
                 .font(.system(size: 100))
             
         } else {
-            Text(folderTitle)
+            Text("よく使う項目")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.largeTitle)
                 .padding(.leading, 20)
@@ -192,7 +189,7 @@ extension FolderDetailView {
                                         .padding(.leading, 20)
                                         .foregroundColor(Color("RecordingSFSymbleColor"))
                                     Spacer()
-                                    Text(VoiceMemoModel.formatTime(from: memo.duration ))
+                                    Text(VoiceMemoModel.formatListTime(from: memo.duration ))
                                         .padding(.trailing, 20)
                                         .foregroundColor(Color("RecordingSFSymbleColor"))
                                 }
@@ -204,7 +201,7 @@ extension FolderDetailView {
                     }
                     if expandedIndex == memo.objectID.hashValue  {
                         VStack {
-                            SeekBarView(voiceMemo: memo)
+                            PlayFileView(voiceMemo: memo)
                         }
                         
                     }
@@ -260,19 +257,6 @@ extension FolderDetailView {
             print("削除中にエラーが発生しました: \(error)")
         }
     }
-    
-    private func fetchVoiceMemos() {
-        let request: NSFetchRequest<VoiceMemoEntities> = VoiceMemoEntities.fetchRequest()
-        request.predicate = NSPredicate(format: "folderID == %@ AND isDelete == NO", folderID as CVarArg)
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \VoiceMemoEntities.createdAt, ascending: false)]
-
-        do {
-            voiceMemos = try context.fetch(request) // データをフェッチ
-        } catch {
-            print("Error fetching voice memos: \(error)")
-        }
-    }
-
 }
 
 

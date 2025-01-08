@@ -61,24 +61,13 @@ struct AddFolderView: View {
 //                        .foregroundColor(Color("DataCount"))
                         .offset(x:28,y: -5)
                         .onTapGesture {
-                            saveFolder()
+                            if let newID = FolderModel.saveFolder(viewContext: viewContext, textFieldText: textFieldText) {
+                                selectedFolderID = newID
+                            }
                             isAddFolder = false // 保存して閉じる
                         }
                 }
             }
-        }
-    }
-    private func saveFolder() {
-        let newFolder = FolderEntities(context: viewContext)
-       let newID = UUID()
-        newFolder.id = newID
-        newFolder.title = textFieldText
-        newFolder.numberOfData = 0 // デフォルト値を設定
-        do {
-            try viewContext.save() // Core Data に保存
-            selectedFolderID = newID 
-        } catch {
-            print("Error saving folder: \(error.localizedDescription)")
         }
     }
 }

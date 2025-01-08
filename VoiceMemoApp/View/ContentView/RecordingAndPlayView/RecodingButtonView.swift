@@ -19,7 +19,6 @@ struct RecodingButtonView: View {
     @State private var showTab: Bool = false
     @State private var isRecording: Bool = false
     @StateObject private var locationManager = LocationManager()
-    
     @State private var recordingDuration: Double = 0
     @State private var timer: Timer? = nil
     @State private var audioRecorder: AVAudioRecorder? = nil
@@ -67,7 +66,7 @@ extension RecodingButtonView {
                     .bold()
                     .font(.system(size: 20))
                 Spacer().frame(height: 30)
-                Text(formatTime(from: recordingDuration))
+                Text(VoiceMemoModel.formatRecordingTime(from: recordingDuration))
                 Spacer().frame(height: 50)
                 Text("録音中....")
                     .bold()
@@ -154,15 +153,6 @@ extension RecodingButtonView {
     // ドキュメントディレクトリのパスを取得
     private func getDocumentsDirectory() -> URL {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-    }
-
-    
-    // 時間をフォーマットする
-    private func formatTime(from duration: Double) -> String {
-        let hours = Int(duration) / 3600
-        let minutes = (Int(duration) % 3600) / 60
-        let seconds = Int(duration) % 60
-        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 
 

@@ -9,7 +9,9 @@ import CoreData
 import SwiftUI
 
 struct VoiceMemoModel {
+    
 
+//    メモの追加と削除
     static func addVoiceMemo(title: String, duration: Double, context: NSManagedObjectContext,location: String? = nil, filePath: String? = nil) {
         let newVoiceMemo = VoiceMemoEntities(context: context)
         newVoiceMemo.title = title
@@ -28,19 +30,6 @@ struct VoiceMemoModel {
         }
     }
     
-    static func formattedDate(from date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd"
-        return formatter.string(from: date)
-    }
-    
-    static func formatTime(from duration: Double) -> String {
-       let minutes = Int(duration) / 60
-       let seconds = Int(duration) % 60
-       return String(format: "%02d:%02d", minutes, seconds)
-   }
-
-    
     static func seekBarDeleteVoiceMemo(_ voiceMemo: VoiceMemoEntities, context: NSManagedObjectContext) {
         context.delete(voiceMemo)
         do {
@@ -52,6 +41,28 @@ struct VoiceMemoModel {
         
     }
     
+    
+//フォーマット
+    static func formattedDate(from date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        return formatter.string(from: date)
+    }
+    
+    static func formatListTime(from duration: Double) -> String {
+       let minutes = Int(duration) / 60
+       let seconds = Int(duration) % 60
+       return String(format: "%02d:%02d", minutes, seconds)
+   }
+    static func formatRecordingTime(from duration: Double) -> String {
+        let hours = Int(duration) / 3600
+        let minutes = (Int(duration) % 3600) / 60
+        let seconds = Int(duration) % 60
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+
+    
+// フォルダ移動
     static func moveToDeletedFolder(_ voiceMemo: VoiceMemoEntities, context: NSManagedObjectContext) {
         voiceMemo.isDelete = true // 削除済みとしてマーク
         do {
@@ -90,6 +101,7 @@ struct VoiceMemoModel {
             print("削除済みフォルダへの移動中にエラー: \(error)")
         }
     } 
+    
     static func moveSelectedMemosToFolder(selectedFolder: FolderEntities, selectedMemos: Set<NSManagedObjectID>, context: NSManagedObjectContext,voiceMemos: FetchedResults<VoiceMemoEntities>) {
         selectedMemos.forEach { objectID in
             if let memo = context.object(with: objectID) as? VoiceMemoEntities {
@@ -107,6 +119,7 @@ struct VoiceMemoModel {
             print("フォルダへの移動中にエラー: \(error)")
         }
     }
+
     }
 
     

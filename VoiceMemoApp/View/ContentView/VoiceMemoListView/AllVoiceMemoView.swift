@@ -7,21 +7,20 @@
 import SwiftUI
 import CoreData
 
-struct OftenUsedFolderView: View {
-
+struct AllVoiceMemoView: View {
+    var folderID: UUID? // フォルダのID
+    var folderTitle: String = "すべての録音" // デフォルト値を設定
+    
     @Environment(\.managedObjectContext) private var context
-
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \VoiceMemoEntities.createdAt, ascending: false)],
-        predicate: NSPredicate(format: "isDelete == NO AND isFav == YES"),
+        predicate: NSPredicate(format: "isDelete == NO AND isFav == NO AND folderID == nil" ),
         animation: .default
     ) private var voiceMemos: FetchedResults<VoiceMemoEntities>
-    
     @State private var textFieldText: String = ""
     @State private var expandedIndex: Int? = nil
     @State private var isEditing: Bool = false
     @State private var editingMemoID: NSManagedObjectID? = nil
-//    @State private var isEditingTitle: Bool = false
     @State private var editableText: String = ""
     @State private var selectedMemos: Set<NSManagedObjectID> = []
     @StateObject private var locationManager = LocationManager()
@@ -38,14 +37,12 @@ struct OftenUsedFolderView: View {
                         .onAppear {
                             proxy.scrollTo(0, anchor: .top)
                         }
-                    
                     if isEditing {
                         EditBottomView(selectedMemos: $selectedMemos,deleteAction: editModeDeleteMemos)
                     } else {
                         RecodingButtonView(context: context, addVoiceMemoWithLocation: addVoiceMemoWithLocation)
 
                     }
-
                 }
             }
         }
@@ -55,13 +52,13 @@ struct OftenUsedFolderView: View {
    
 
 #Preview {
-    ContentView()
+    AllVoiceMemoView()
 }
 
 
 
 
-extension OftenUsedFolderView {
+extension AllVoiceMemoView {
     
     private var headerArea: some View {
         HStack{
@@ -98,7 +95,7 @@ extension OftenUsedFolderView {
                 .font(.system(size: 100))
             
         } else {
-            Text("よく使う項目")
+            Text("すべての録音")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.largeTitle)
                 .padding(.leading, 20)
@@ -194,7 +191,7 @@ extension OftenUsedFolderView {
                                         .padding(.leading, 20)
                                         .foregroundColor(Color("RecordingSFSymbleColor"))
                                     Spacer()
-                                    Text(VoiceMemoModel.formatTime(from: memo.duration ))
+                                    Text(VoiceMemoModel.formatListTime(from: memo.duration ))
                                         .padding(.trailing, 20)
                                         .foregroundColor(Color("RecordingSFSymbleColor"))
                                 }
@@ -206,7 +203,7 @@ extension OftenUsedFolderView {
                     }
                     if expandedIndex == memo.objectID.hashValue  {
                         VStack {
-                            SeekBarView(voiceMemo: memo)
+                            PlayFileView(voiceMemo: memo)
                         }
                         
                     }
@@ -263,5 +260,4 @@ extension OftenUsedFolderView {
         }
     }
 }
-
 

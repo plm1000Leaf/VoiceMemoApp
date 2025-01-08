@@ -14,7 +14,7 @@ struct VoiceMemoAppApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AllVoiceMemoView()
                 .environment(\.managedObjectContext, persistentContainer.viewContext) // 環境にコンテキストを追加
         }
     }

@@ -50,10 +50,6 @@ struct DeletedFolderView: View {
 
    
 
-#Preview {
-    ContentView()
-}
-
 
 
 
@@ -190,7 +186,7 @@ extension DeletedFolderView{
                                         .padding(.leading, 20)
                                         .foregroundColor(Color("RecordingSFSymbleColor"))
                                     Spacer()
-                                    Text(VoiceMemoModel.formatTime(from: memo.duration ))
+                                    Text(VoiceMemoModel.formatListTime(from: memo.duration ))
                                         .padding(.trailing, 20)
                                         .foregroundColor(Color("RecordingSFSymbleColor"))
                                 }
@@ -202,7 +198,7 @@ extension DeletedFolderView{
                     }
                     if expandedIndex == memo.objectID.hashValue  {
                         VStack {
-                            SeekBarView(voiceMemo: memo)
+                            PlayFileView(voiceMemo: memo)
                         }
                         
                     }
@@ -221,19 +217,7 @@ extension DeletedFolderView{
     }
         
         
-    private func addVoiceMemoWithLocation() {
-        // LocationManagerから位置情報を取得
-        let location = locationManager.location ?? "不明な場所"
-        let title = location
-        
-        // Core Dataに新しいメモを追加
-        VoiceMemoModel.addVoiceMemo(
-            title: title,
-            duration: 120.0, // 仮の録音時間
-            context: context,
-            location: location
-        )
-    }
+
 
     private func saveEditedTitle(for memo: VoiceMemoEntities) {
         memo.title = editableText

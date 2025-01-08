@@ -184,7 +184,7 @@ struct SelectFolderView: View {
                                             .frame(maxWidth: .infinity, alignment: .leading)
                                             .padding(.leading, -80)
                                             .foregroundColor(.black)
-                                        Text("3")
+                                        Text("\(folder.numberOfData)")
                                             .foregroundColor(Color("DataCount"))
                                             .offset(x:-50)
                                         

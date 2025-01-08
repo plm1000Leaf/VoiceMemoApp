@@ -61,7 +61,7 @@ struct VoiceMemoFolderView: View {
     private func destinationView(for index: Int) -> some View {
         switch index {
         case 0:
-            ContentView()
+            AllVoiceMemoView()
                 .navigationBarBackButtonHidden(true)
         case 1:
             OftenUsedFolderView()

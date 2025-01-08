@@ -34,7 +34,7 @@ struct  EditMemoRowView: View {
                         .padding(.leading, 20)
                         .foregroundColor(Color("RecordingSFSymbleColor"))
                     Spacer()
-                    Text(VoiceMemoModel.formatTime(from: memo.duration ))
+                    Text(VoiceMemoModel.formatListTime(from: memo.duration ))
                         .padding(.trailing, 20)
                         .foregroundColor(Color("RecordingSFSymbleColor"))
                 }
