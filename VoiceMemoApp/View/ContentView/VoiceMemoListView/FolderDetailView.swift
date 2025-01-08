@@ -14,18 +14,25 @@ struct FolderDetailView: View {
     var folderTitle: String
     
     @Environment(\.managedObjectContext) private var context
-    @State private var voiceMemos: [VoiceMemoEntities] = []
-
-
+    @FetchRequest private var voiceMemos: FetchedResults<VoiceMemoEntities>
+    
     @State private var textFieldText: String = ""
     @State private var expandedIndex: Int? = nil
     @State private var isEditing: Bool = false
     @State private var editingMemoID: NSManagedObjectID? = nil
-//    @State private var isEditingTitle: Bool = false
     @State private var editableText: String = ""
     @State private var selectedMemos: Set<NSManagedObjectID> = []
     @StateObject private var locationManager = LocationManager()
     
+    init(folderID: UUID, folderTitle: String) {
+        self.folderID = folderID
+        self.folderTitle = folderTitle
+        _voiceMemos = FetchRequest(
+            sortDescriptors: [NSSortDescriptor(keyPath: \VoiceMemoEntities.createdAt, ascending: false)],
+            predicate: NSPredicate(format: "folderID == %@ AND isDelete == NO", folderID as CVarArg),
+            animation: .default
+        )
+    }
     
     var body: some View {
             VStack {
@@ -48,7 +55,6 @@ struct FolderDetailView: View {
 
                 }
             }
-            .onAppear(perform: fetchVoiceMemos)
             .navigationTitle(folderTitle)
             .navigationBarTitleDisplayMode(.inline)
         }
@@ -261,18 +267,6 @@ extension FolderDetailView {
         }
     }
     
-    private func fetchVoiceMemos() {
-        let request: NSFetchRequest<VoiceMemoEntities> = VoiceMemoEntities.fetchRequest()
-        request.predicate = NSPredicate(format: "folderID == %@ AND isDelete == NO", folderID as CVarArg)
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \VoiceMemoEntities.createdAt, ascending: false)]
-
-        do {
-            voiceMemos = try context.fetch(request) // データをフェッチ
-        } catch {
-            print("Error fetching voice memos: \(error)")
-        }
-    }
-
 }
 
 

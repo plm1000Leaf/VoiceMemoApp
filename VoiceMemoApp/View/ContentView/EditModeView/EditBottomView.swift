@@ -61,6 +61,12 @@ struct EditBottomView: View {
             context: context
         )
         selectedMemos.removeAll() // 選択をクリア
+        
+        do {
+            try context.save() // データベースの変更を確定
+        } catch {
+            print("Error saving context: \(error)")
+        }
     }
 
 }
