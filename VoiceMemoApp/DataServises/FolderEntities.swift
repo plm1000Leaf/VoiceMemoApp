@@ -16,3 +16,8 @@ public class FolderEntities: NSManagedObject {
     @NSManaged public var voicememos: Set<VoiceMemoEntities>?
 }
 
+extension FolderEntities {
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<FolderEntities> {
+        return NSFetchRequest<FolderEntities>(entityName: "FolderEntities")
+    }
+}

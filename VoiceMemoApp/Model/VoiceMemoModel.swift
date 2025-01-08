@@ -31,7 +31,14 @@ struct VoiceMemoModel {
     }
     
     static func seekBarDeleteVoiceMemo(_ voiceMemo: VoiceMemoEntities, context: NSManagedObjectContext) {
-        context.delete(voiceMemo)
+        if let folderID = voiceMemo.folderID,
+           let folder = fetchFolderByID(folderID, context: context) {
+            context.delete(voiceMemo)
+            updateNumberOfData(for: folder, context: context)
+        } else {
+            context.delete(voiceMemo)
+        }
+
         do {
             try context.save()
             print("VoiceMemo削除成功: \(voiceMemo.title ?? "No Title")")
@@ -74,21 +81,54 @@ struct VoiceMemoModel {
         
         
     }
-    
-    static func moveSelectedMemosToDeletedFolder(selectedMemos:Set<NSManagedObjectID>,voiceMemos: FetchedResults<VoiceMemoEntities>,context: NSManagedObjectContext) {
+    static func moveSelectedMemosToDeletedFolder(
+        selectedMemos: Set<NSManagedObjectID>,
+        voiceMemos: FetchedResults<VoiceMemoEntities>,
+        context: NSManagedObjectContext
+    ) {
+        var affectedFolders: Set<UUID> = []
+
+        // 削除フラグを設定
         selectedMemos.forEach { objectID in
             if let memo = voiceMemos.first(where: { $0.objectID == objectID }) {
                 memo.isFav = false
-                memo.isDelete = true // 削除フラグを立てる
+                memo.isDelete = true
+                if let folderID = memo.folderID {
+                    affectedFolders.insert(folderID)
+                }
             }
         }
+
+        // 保存処理
         do {
             try context.save()
+            print("削除フラグが正常に設定されました。")
+
+            // numberOfData を更新
+            for folderID in affectedFolders {
+                if let folder = fetchFolderByID(folderID, context: context) {
+                    updateNumberOfData(for: folder, context: context)
+                }
+            }
         } catch {
             print("削除済みフォルダへの移動中にエラー: \(error)")
         }
     }
-    
+//    static func moveSelectedMemosToDeletedFolder(selectedMemos:Set<NSManagedObjectID>,voiceMemos: FetchedResults<VoiceMemoEntities>,context: NSManagedObjectContext) {
+//        selectedMemos.forEach { objectID in
+//            if let memo = voiceMemos.first(where: { $0.objectID == objectID }) {
+//                memo.isFav = false
+//                memo.isDelete = true // 削除フラグを立てる
+//            
+//            }
+//        }
+//        do {
+//            try context.save()
+//        } catch {
+//            print("削除済みフォルダへの移動中にエラー: \(error)")
+//        }
+//    }
+//    
     static func moveSelectedMemosToFavFolder(selectedMemos:Set<NSManagedObjectID>,voiceMemos: FetchedResults<VoiceMemoEntities>,context: NSManagedObjectContext) {
         selectedMemos.forEach { objectID in
             if let memo = voiceMemos.first(where: { $0.objectID == objectID }) {
@@ -107,6 +147,7 @@ struct VoiceMemoModel {
             if let memo = context.object(with: objectID) as? VoiceMemoEntities {
                 memo.folderID = selectedFolder.id // フォルダIDを更新
             }
+            updateNumberOfData(for: selectedFolder, context: context)
         }
         
         let folderMemosCount = voiceMemos.filter { $0.folderID == selectedFolder.id }.count
@@ -119,6 +160,34 @@ struct VoiceMemoModel {
             print("フォルダへの移動中にエラー: \(error)")
         }
     }
+    
+    // フォルダのメモ数を更新
+    static func updateNumberOfData(for folder: FolderEntities, context: NSManagedObjectContext) {
+        let request: NSFetchRequest<VoiceMemoEntities> = VoiceMemoEntities.fetchRequest()
+        request.predicate = NSPredicate(format: "folderID == %@ AND isDelete == NO", folder.id as CVarArg)
+
+        do {
+            let memoCount = try context.count(for: request)
+            folder.numberOfData = Int32(memoCount)
+            try context.save()
+            print("Folder \(folder.title) の numberOfData を更新しました: \(memoCount)")
+        } catch {
+            print("numberOfData の更新中にエラー: \(error)")
+        }
+    }
+    
+    static func fetchFolderByID(_ id: UUID, context: NSManagedObjectContext) -> FolderEntities? {
+        let request: NSFetchRequest<FolderEntities> = FolderEntities.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+
+        do {
+            return try context.fetch(request).first
+        } catch {
+            print("フォルダ取得中にエラー: \(error)")
+            return nil
+        }
+    }
+
 
     }
 
