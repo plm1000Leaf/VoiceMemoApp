@@ -48,6 +48,7 @@ struct AddFolderView: View {
                         .offset(x: -43, y: -5)
                         .foregroundColor(.blue)
                         .onTapGesture {
+                            textFieldText = ""
                             isAddFolder = false // キャンセルで閉じる
                         }
                     
@@ -64,6 +65,7 @@ struct AddFolderView: View {
                             if let newID = FolderModel.saveFolder(viewContext: viewContext, textFieldText: textFieldText) {
                                 selectedFolderID = newID
                             }
+                            textFieldText = ""
                             isAddFolder = false // 保存して閉じる
                         }
                 }

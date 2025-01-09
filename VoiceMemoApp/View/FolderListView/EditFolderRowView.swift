@@ -47,7 +47,7 @@ struct EditFolderRowView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.leading, -50)
                             .foregroundColor(.black)
-                        Text("3")
+                        Text("\(folder.numberOfData)")
                             .foregroundColor(Color("DataCount"))
                             .offset(x:-50)
                         Image(systemName: "chevron.right")
@@ -55,12 +55,13 @@ struct EditFolderRowView: View {
                             .offset(x:-45)
                             .bold()
                     }
+                    Divider()
+                        .foregroundColor(Color("ListLine"))
+                        .frame(width: 270, height: 20)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding(.trailing, 20)
                 }
-                            Divider()
-                                .foregroundColor(Color("ListLine"))
-                                .frame(width: 270, height: 20)
-                                .frame(maxWidth: .infinity, alignment: .trailing)
-                                .padding(.trailing, 20)
+
                         }
                     }
                 }
