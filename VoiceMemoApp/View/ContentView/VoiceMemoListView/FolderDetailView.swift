@@ -47,10 +47,9 @@ struct FolderDetailView: View {
                         }
                     
                     if isEditing {
-                        EditBottomView(selectedMemos: $selectedMemos,deleteAction: editModeDeleteMemos)
+                        EditDetailBottomView(selectedMemos: $selectedMemos,deleteAction: editModeDeleteMemos)
                     } else {
-                        RecodingButtonView(context: context, addVoiceMemoWithLocation: addVoiceMemoWithLocation)
-
+                        EmptyView()
                     }
 
                 }
